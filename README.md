@@ -6,18 +6,18 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 ## 📌 Project Overview  
 - Develop a **윷놀이 game** using OOAD techniques.  
 - Players can specify the **number of participants** (2 to 4) and **number of game pieces** (2 to 5).  
-- The game board follows the **standard Yut Nori layout**, displaying each player's piece locations.  
+- The game board follows the **standard 윷놀이 layout**, displaying each player's piece locations.  
 - Players take turns using:  
-  - **"Random Throw" button** for random Yut results.  
+  - **"Random Throw" button** for random results.  
   - **"Manual Throw" button** to select specific results for testing.  
 - The game supports:  
-  - **Piece grouping (stacking pieces together)**  
+  - **Piece grouping (말 업기)**  
   - **Capturing opponents’ pieces**  
   - **Winning conditions**: The first player to move all pieces to the goal wins.  
 - Players can **restart** or **exit** after a game finishes.  
 
 ## 📅 Project Timeline  
-### ✅ First Due (Mid-March)  
+### ✅ First Due (5th April)  
 - Create a **GitHub project page** and post it on the e-class project board.  
 
 ### ✅ Mid Due (10th May)  
