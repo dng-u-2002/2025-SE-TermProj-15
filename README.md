@@ -54,6 +54,7 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 
 ## 역할분담
 - 문서화 및 UML : 김영준, 양희옥
-- 개발 : 김동우, 이규빈, 하동윤
+- UI 개발 : 이규빈, 하동윤
+- Logic 개발 : 김동우
 
 ## 📂 Repository Structure  
