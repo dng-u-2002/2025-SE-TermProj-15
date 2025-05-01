@@ -50,6 +50,10 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 - Implement using **MVC architecture** (separating UI and logic).  
 - Support **multiple UI toolkits** to demonstrate modularity.  
 - Ensure **JUnit testability** for core logic.  
-- Enable **custom board shapes** (e.g., pentagon, hexagon).  
+- Enable **custom board shapes** (e.g., pentagon, hexagon).
+
+## 역할분담
+- 문서화 및 UML : 김영준, 양희옥
+- 개발 : 김동우, 이규빈, 하동윤
 
 ## 📂 Repository Structure  
