@@ -57,4 +57,8 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 - UI 개발 : 이규빈, 하동윤
 - Logic 개발 : 김동우
 
+## 1차 데드라인
+- 5/3 UML 작성 완료
+- 5/8 Java Swing 구현 완료
+
 ## 📂 Repository Structure  
