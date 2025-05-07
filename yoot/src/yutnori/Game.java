@@ -125,32 +125,24 @@ public class Game {
     }
 
     private void applyResultToPiece(Piece piece, YutResult result) {
-        // ✅ 1. 이전 이동에서 분기 가능 상태였다면, 먼저 분기 노드로 이동 (윷 결과를 소비하지 않음)
-        if (piece.isEligibleForBranch()) {
-            String from = piece.getLocation().getId();
-            switch (from) {
-                case "5" -> piece.moveTo(board.getLocationById("51"));
-                case "10" -> piece.moveTo(board.getLocationById("101"));
-                case "200" -> piece.moveTo(board.getLocationById("201"));
-            }
-            piece.setEligibleForBranch(false); // 한 번만 분기
-            System.out.println("분기 경로로 이동합니다.");
-            return; // 다음 윷 결과는 다음 호출에서 처리
-        }
-
-        // ✅ 2. 일반 이동 처리
         Location current = piece.getLocation();
         List<Location> nextLocs = board.getNextLocations(current, result);
+
         if (nextLocs.isEmpty()) {
             System.out.println("이동 가능한 위치가 없습니다.");
             result.setUsed(true);
             return;
         }
 
-        Location destination = nextLocs.get(0);  // 단일 경로 선택 (복수 처리 시 개선 가능)
+        List<String> branchTargets = List.of("51", "52", "101", "102", "151", "152", "200", "201");
+        Location destination = nextLocs.stream()
+                .filter(loc -> branchTargets.contains(loc.getId()))
+                .findFirst()
+                .orElse(nextLocs.get(0));
+
+
         System.out.println("말이 " + destination.getId() + "로 이동합니다.");
 
-        // 잡기 처리
         for (Piece p : destination.getPiecesOnThisLocation()) {
             if (!p.getOwner().equals(piece.getOwner())) {
                 System.out.println("잡기 발생! " + p + " 제거!");
@@ -161,13 +153,6 @@ public class Game {
 
         piece.moveTo(destination);
 
-        // ✅ 3. 정지 위치가 분기 가능 위치인지 확인 후 설정
-        boolean shouldBranch = destination.getId().equals("5")
-                || destination.getId().equals("10")
-                || destination.getId().equals("200");
-        piece.setEligibleForBranch(shouldBranch);
-
-        // 완주 처리
         if (destination.isEnd()) {
             piece.setFinished(true);
             System.out.println(piece + "이(가) 완주했습니다!");
@@ -175,9 +160,6 @@ public class Game {
 
         result.setUsed(true);
     }
-
-
-
 
     public Player getCurrentPlayer() {
         return turn.getCurrentPlayer();
