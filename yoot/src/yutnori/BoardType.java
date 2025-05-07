@@ -1,4 +1,4 @@
-package yoot;
+package yutnori;
 
 public enum BoardType {
     RECTANGLE,  // 사각형

@@ -1,4 +1,4 @@
-package yoot;
+package yutnori;
 
 public class Path {
     private Location from;
@@ -21,5 +21,10 @@ public class Path {
 
     public int getStepCount() {
         return stepCount;
+    }
+
+    @Override
+    public String toString() {
+        return from.getId() + " --(" + stepCount + "칸)--> " + to.getId();
     }
 }
