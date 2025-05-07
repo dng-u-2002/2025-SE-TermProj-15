@@ -1,10 +1,18 @@
-
+import java.awt.*;
+import javax.swing.*;
 
 public class BoardFrame extends JFrame {
+
+    BoardPanel board;
     BoardFrame(){
+        board = new BoardPanel();
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,500);
+        this.add(board);
+        this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+
 }
