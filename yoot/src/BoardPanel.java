@@ -45,7 +45,7 @@ public class BoardPanel extends JPanel {
                 //도형 테두리 검정색 원으로 그리기
                 g2D.setPaint(Color.black);
                 g2D.drawOval(locationX[i] - 17, locationY[i] - 17, 34, 34);
-                //g2D.drawString(Integer.toString(i), locationX[i] - 10, locationY[i]);         //각 원 인덱스 확인용(디버깅 때 사용)
+                g2D.drawString(Integer.toString(i), locationX[i] - 10, locationY[i]);         //각 원 인덱스 확인용(디버깅 때 사용)
                 if(i % 5 == 0) {       //갈림길과 출발점에 더블 원 그리기
                     g2D.drawOval(locationX[i] - 15, locationY[i] - 15, 30, 30);
                 }
@@ -58,9 +58,6 @@ public class BoardPanel extends JPanel {
             g2D.setPaint(Color.RED);
             g2D.fillOval(locationX[pieceIndex] - 10, locationY[pieceIndex] - 10, 20, 20);
         }
-
-
-
     }
 
     public void setPoints(){                            //도형의 꼭짓점 좌표 저장
@@ -93,10 +90,10 @@ public class BoardPanel extends JPanel {
                 locationY[5*i + j] = (j*arrY[next] + (5-j)*arrY[i])/5;
             }
             if(i != 0){     //도형 내부에 있는 원들 내분점 공식 이용해 위치 특정
-                locationX[50*i + 1] = (arrX[i] + 2*center)/3;
-                locationX[50*i + 2] = (2*arrX[i] + center)/3;
-                locationY[50*i + 1] = (arrY[i] + 2*center)/3;
-                locationY[50*i + 2] = (2*arrY[i] + center)/3;
+                locationX[50*i + 1] = (2*arrX[i] + center)/3;
+                locationX[50*i + 2] = (arrX[i] + 2*center)/3;
+                locationY[50*i + 1] = (2*arrY[i] + center)/3;
+                locationY[50*i + 2] = (arrY[i] + 2*center)/3;
             } else{     //출발점과 중심점에 해당하는 원들의 좌표
                 locationX[50*point] = center;
                 locationX[50*point + 1] = (arrX[i] + 2*center)/3;
@@ -123,6 +120,4 @@ public class BoardPanel extends JPanel {
             }
         }
     }
-
-
 }
