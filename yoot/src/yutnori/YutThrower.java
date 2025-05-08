@@ -17,18 +17,18 @@ public class YutThrower {
         Scanner scanner = new Scanner(System.in);
         System.out.println("윷 결과를 수동으로 선택하세요:");
         for (int i = 0; i < YutResultType.values().length; i++) {
-            System.out.println((i + 1) + ". " + YutResultType.values()[i].getDisplayName());
+            System.out.println((i) + ". " + YutResultType.values()[i].getDisplayName());
         }
 
         int choice;
         while (true) {
             System.out.print("번호 입력 (1 ~ 6): ");
             choice = scanner.nextInt();
-            if (choice >= 1 && choice <= 6) break;
+            if (choice >= 0 && choice <= 5) break;
             System.out.println("잘못된 선택입니다.");
         }
 
-        YutResultType chosen = YutResultType.values()[choice - 1];
+        YutResultType chosen = YutResultType.values()[choice];
         System.out.println("수동 선택 결과: [" + chosen.getDisplayName() + "]");
         return new YutResult(chosen);
     }
