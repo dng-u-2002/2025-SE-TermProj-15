@@ -132,7 +132,12 @@ public class Game {
                 player.exitStart();
                 continue;
             }
-            player.pieceIndex[moveTo] = player.pieceIndex[selected];
+            for(Player opponent: players){
+                if(player.getId() != opponent.getId()){
+                    opponent.pieceCaught(moveTo);
+                }
+            }
+            player.pieceIndex[moveTo] += player.pieceIndex[selected];
             player.pieceIndex[selected] = 0;
         }
     }

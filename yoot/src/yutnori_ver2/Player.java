@@ -35,6 +35,12 @@ public class Player {
     public void exitStart(){
         pieceAtStart--;
     }
+
+    public void pieceCaught(int index){
+        if(pieceIndex[index] != 0){
+            pieceIndex[index] = 0;
+        }
+    }
     public void getPlayerInfo() {
         System.out.println("player" + id + "pieceNum: " + pieceNum);
         System.out.println("starting: " + pieceAtStart + ", ended: " + pieceAtEnd);
