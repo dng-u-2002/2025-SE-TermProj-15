@@ -75,11 +75,14 @@ public class Game {
                     System.out.println(player.pieceIndex[i] + " pieces at " + i);
                 }
             }
+            System.out.println(player.pieceAtStart + " pieces at start");
+
             //이동할 말 선택
             int selected;
             while (true) {
                 System.out.print("이동시킬 말 번호 선택: ");
                 selected = scanner.nextInt();
+                if(selected == 999) break;
                 if (player.pieceIndex[selected] != 0) break;
                 System.out.println("잘못된 선택입니다.");
             }
@@ -124,8 +127,13 @@ public class Game {
             int removeIndex = possibleLocation.indexOf(moveTo);
             possibleLocation.remove(removeIndex);
             yutResultAtTurn.remove(removeIndex);
-            player.pieceIndex[moveTo]++;
-            player.pieceIndex[selected]--;
+            if(selected == 999){
+                player.pieceIndex[moveTo] = 1;
+                player.exitStart();
+                continue;
+            }
+            player.pieceIndex[moveTo] = player.pieceIndex[selected];
+            player.pieceIndex[selected] = 0;
         }
     }
 

@@ -11,24 +11,28 @@ public class RuleEngine {
     private boolean isCenter = false;
     private boolean isDiagonal = false;
     public boolean isFinish = false;
+    public boolean isStart = false;
 
     public RuleEngine(int index, int boardType, List<Integer> yutResult){
         this.index = index;
         this.boardType = boardType;
         this.yutResult = yutResult;
-        if(index == 50*boardType){
+        if(index == 999){
+            isStart = true;
+        }else if(index == 50*boardType){
             isCenter = true;
         } else if(index % 5 == 0){
             isCorner = true;
         } else if(index >= 50){
             isDiagonal = true;
         }
-
     }
 
     public List<Integer> getPossibleLocation(){
         for(int yut: yutResult){
-            if(isCenter){
+            if(isStart){
+                possibleLocation.add(yut);
+            } else if(isCenter){
                 switch(yut){
                     case -1 -> possibleLocation.add((boardType-1) * 50 + 2 ); //빽도 구현 미완성 지점
                     case 1, 2 -> possibleLocation.add(index + yut);
