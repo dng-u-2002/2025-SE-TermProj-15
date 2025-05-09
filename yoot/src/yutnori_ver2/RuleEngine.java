@@ -57,53 +57,201 @@ public class RuleEngine {
                     case -1 -> possibleLocation.add(index + yut);
                     case 1, 2 -> possibleLocation.add(index*10 + yut);
                     case 3 -> possibleLocation.add(boardType*50);
-                    case 4 -> possibleLocation.add((-2*index*index + 1030*index + 10100) / 100);
-                    case 5 -> possibleLocation.add((2 * index*index + 970*index + 10200) / 100);
+                    case 4 -> possibleLocation.add((251*index*index*index - 6795*index*index + 58000*index) / 750);
+                    case 5 -> possibleLocation.add((252*index*index*index - 6795*index*index + 57825*index) / 750);
                 }
             } else if(isCorner && boardType == 6){ // 육각형 코너
                 switch(yut){
                     case -1 -> possibleLocation.add(index + yut);
                     case 1, 2 -> possibleLocation.add(index*10 + yut);
                     case 3 -> possibleLocation.add(boardType*50);
-                    case 4 -> possibleLocation.add((-index*index*index + 30*index*index + 7225*index + 77250) / 750);
-                    case 5 -> possibleLocation.add((-index*index*index - 30*index*index + 7775*index + 75000) / 750);
+                    case 4 -> possibleLocation.add((-98*index*index*index + 3675*index*index - 37975*index + 299250) / 750);
+                    case 5 -> possibleLocation.add((-102*index*index*index + 3825*index*index - 39525*index + 303000) / 750);
                 }
             }else if(isDiagonal){
                 int temp = index % 10;
-                if(temp == 1 && index < boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add((index + yut) / 10);
-                        case 1 -> possibleLocation.add(index + yut);
-                        case 2 -> possibleLocation.add(boardType*50);
-                        case 3 -> possibleLocation.add(boardType*50 + 1);
-                        case 4 -> possibleLocation.add(boardType*50 + 2);
-                        case 5 -> possibleLocation.add(0);
+                if(boardType == 4){
+                    if(index == 51){
+                        switch(yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(152);
+                            case 4 -> possibleLocation.add(151);
+                            case 5 -> possibleLocation.add(15);
+                        }
+                    }else if(index == 101){
+                        switch(yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(201);
+                            case 4 -> possibleLocation.add(202);
+                            case 5 -> possibleLocation.add(0);
+                        }
+                    }else if(index == 52){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(152);
+                            case 3 -> possibleLocation.add(151);
+                            case 4 -> possibleLocation.add(15);
+                            case 5 -> possibleLocation.add(16);
+                        }
+                    } else if(index == 152){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(index - yut);
+                            case 2, 3, 4, 5 -> possibleLocation.add(13 + yut);
+                        }
+                    } else if(index == 151){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index - yut);
+                            case 1, 2, 3, 4, 5 -> possibleLocation.add(14 + yut);
+                        }
+                    } else if(index == 201){
+                        switch(yut){
+                            case -1, 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(0);
+                            case 3, 4, 5 -> isFinish = true;
+                        }
+                    } else if(index == 202){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(0);
+                            case 2, 3, 4, 5 -> isFinish = true;
+                        }
                     }
-                } else if(temp == 2 && index < boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add(index + yut);
-                        case 1 -> possibleLocation.add(boardType*50);
-                        case 2 -> possibleLocation.add(boardType*50 + 1);
-                        case 3 -> possibleLocation.add(boardType*50 + 2);
-                        case 4 -> possibleLocation.add(0);
-                        case 5 -> isFinish = true;
+                } else if(boardType == 5){              //오각형
+                    if(temp == 1 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(202);
+                            case 4 -> possibleLocation.add(201);
+                            case 5 -> possibleLocation.add(20);
+                        }
+                    } else if(temp == 2 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(202);
+                            case 3 -> possibleLocation.add(201);
+                            case 4 -> possibleLocation.add(20);
+                            case 5 -> possibleLocation.add(21);
+                        }
+                    } else if (index == 151){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(251);
+                            case 4 -> possibleLocation.add(252);
+                            case 5 -> possibleLocation.add(0);
+                        }
+                    } else if (index == 152){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(251);
+                            case 3 -> possibleLocation.add(252);
+                            case 4 -> possibleLocation.add(0);
+                            case 5 -> isFinish = true;
+                        }
+                    } else if (index == 202){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(201);
+                            case 2, 3, 4, 5 -> possibleLocation.add(18 + yut);
+                        }
+                    } else if (index == 201){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index - yut);
+                            case 1, 2, 3, 4, 5 -> possibleLocation.add(19 + yut);
+                        }
+                    } else if(index == 251){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(252);
+                            case 2 -> possibleLocation.add(0);
+                            case 3, 4, 5 -> isFinish = true;
+                        }
+                    } else if(index == 252){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(251);
+                            case 1 -> possibleLocation.add(0);
+                            case 2, 3, 4, 5 -> isFinish = true;
+                        }
                     }
-                } else if(temp == 1 && index > boardType*50){
-                    switch(yut){
-                        case -1, 1 -> possibleLocation.add(index + yut);
-                        case 2 -> possibleLocation.add(0);
-                        case 3, 4, 5 -> isFinish = true;
-                    }
-                } else if(temp == 2 && index > boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add(index + yut);
-                        case 1 -> possibleLocation.add(0);
-                        case 2, 3, 4, 5 -> isFinish = true;
+                } else{         //육각형
+                    if(temp == 1 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(252);
+                            case 4 -> possibleLocation.add(251);
+                            case 5 -> possibleLocation.add(25);
+                        }
+                    } else if(temp == 2 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(252);
+                            case 3 -> possibleLocation.add(251);
+                            case 4 -> possibleLocation.add(25);
+                            case 5 -> possibleLocation.add(26);
+                        }
+                    } else if(temp == 1 && index > 150 && index < 250){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(301);
+                            case 4 -> possibleLocation.add(302);
+                            case 5 -> possibleLocation.add(0);
+                        }
+                    } else if(temp == 2 && index > 150 && index < 250){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(301);
+                            case 3 -> possibleLocation.add(302);
+                            case 4 -> possibleLocation.add(0);
+                            case 5 -> isFinish = true;
+                        }
+                    } else if(index == 252){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(251);
+                            case 2, 3, 4, 5 -> possibleLocation.add(23 + yut);
+                        }
+                    } else if(index == 251){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(252);
+                            case 1, 2, 3, 4, 5 -> possibleLocation.add(24 + yut);
+                        }
+                    } else if(index == 301){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(302);
+                            case 2 -> possibleLocation.add(0);
+                            case 3, 4, 5 -> isFinish = true;
+                        }
+                    } else if(index == 302){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(301);
+                            case 1 -> possibleLocation.add(0);
+                            case 2, 3, 4, 5 -> isFinish = true;
+                        }
                     }
                 }
             } else {
-                if(index + yut >= boardType*50){
+                if(index + yut > boardType*5){
                     isFinish = true;
+                } else if(index + yut == boardType*5) {
+                    possibleLocation.add(0);
                 } else{
                     possibleLocation.add(index + yut);
                 }
@@ -116,30 +264,61 @@ public class RuleEngine {
     }
 
     public boolean finishAble(int yut){
-        if(isCenter && (yut == 4 || yut == 5)){
-            return true;
-        } else if(index == 0 && yut!= -1){
-            return true;
+        boolean result = false;
+        if(isCenter){
+            switch(yut){
+                case 4, 5 -> result = true;
+            }
+        } else if(index == 0){
+            switch(yut){
+                case 1, 2, 3, 4, 5 -> result = true;
+            }
         } else if(isDiagonal){
             int temp = index % 10;
-            if(temp == 2 && index < boardType*50){
-                if(yut == 5){
-                    return true;
+            if(boardType == 4){
+                if(index == 201){
+                    switch(yut){
+                        case 3, 4, 5 -> result = true;
+                    }
+                } else if(index == 202){
+                    switch(yut){
+                        case 2, 3, 4, 5 -> result = true;
+                    }
                 }
-            } else if(temp == 1 && index > boardType*50){
-                if(yut == 3 || yut == 4 || yut == 5){
-                    return true;
+            } else if(boardType == 5){              //오각형
+                if (index == 152){
+                    if (yut == 5) {
+                        result = true;
+                    }
+                } else if(index == 251){
+                    switch (yut){
+                        case 3, 4, 5 -> result = true;
+                    }
+                } else if(index == 252){
+                    switch (yut){
+                        case 2, 3, 4, 5 -> result = true;
+                    }
                 }
-            } else if(temp == 2 && index > boardType*50){
-                if(yut == 2 ||yut == 3 || yut == 4 || yut == 5){
-                    return true;
+            } else{         //육각형
+                if(temp == 2 && index > 150 && index < 250){
+                    if (yut == 5) {
+                        result = true;
+                    }
+                } else if(index == 301){
+                    switch (yut){
+                        case 3, 4, 5 -> result = true;
+                    }
+                } else if(index == 302){
+                    switch (yut){
+                        case 2, 3, 4, 5 -> result = true;
+                    }
                 }
             }
         } else {
-            if(index + yut >= boardType*50){
-                return true;
+            if(index + yut > boardType*5){
+                result = true;
             }
         }
-        return false;
+        return result;
     }
 }
