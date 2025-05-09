@@ -15,7 +15,20 @@ public class BoardPanel extends JPanel {
     private final int[] locationY = new int[point*100];
     private int pieceIndex = 0;
 
+    BoardPanel(int newPoint){
+        this.point = newPoint;
+        this.setPreferredSize(new Dimension(n, n));
+        this.setPoints();
+        this.setEdges();
 
+        this.addMouseListener(new MouseAdapter() {      //마우스 입력값 받아오기ㅐ
+            public void mouseClicked(MouseEvent e){
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                updatePiecePosition(mouseX, mouseY);
+            }
+        });
+    }
 
     BoardPanel(){
         this.setPreferredSize(new Dimension(n, n));

@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Yoot {
+public class Yut {
 
     // 윷을 던져서 나온 값에 해당하는 플래그
     public static final int BACKDO = -1;    // 빽도: 1칸 뒤로
@@ -15,36 +15,36 @@ public class Yoot {
 
     private static final float PROB_FLAT = 0.6f;        // 평평한 면이 나올 확률, 대체로  평평한 면이 나올 확률이 60%, 둥근 면이 나올 확률을 40%로 한다.
 
-    private static int[] yootSticks = new int[4];       //윷가락을 4개로 하고 yootSticks[0]을 빽도가 있는 윷가락으로 설정한다.
+    private static int[] yutSticks = new int[4];       //윷가락을 4개로 하고 yootSticks[0]을 빽도가 있는 윷가락으로 설정한다.
 
 
-    public static int yootRandom() {
+    public static int yutRandom() {
         Random random = new Random();	// 윷이 랜덤하게 던져질 수 있도록 랜덤값을 생성한다.
-        int yootsum = 0;
+        int yutsum = 0;
 
         for(int i = 0; i < 4; i++)// 총 4번(윷가락의 개수) 반복하면서 각각의 윷가락에 해당되는 면을 랜덤하게 바꿔주고 모든 값을 더해준다.
         {
             if(random.nextFloat() <= PROB_FLAT)    // 평평한 면이 나온 경우
-                yootSticks[i] = SIDE_FLAT;
+                yutSticks[i] = SIDE_FLAT;
             else    // 둥근 면이 나온 경우
-                yootSticks[i] = SIDE_ROUND;
-            yootsum += yootSticks[i]; //총합이 평평한면이 나온 갯수
+                yutSticks[i] = SIDE_ROUND;
+            yutsum += yutSticks[i]; //총합이 평평한면이 나온 갯수
         }
-        if(yootsum == 4)
+        if(yutsum == 4)
         {
             return YOOT;// 윷이 나온 경우
         }
-        else if(yootsum == 3)
+        else if(yutsum == 3)
         {
             return GUL;// 걸이 나온 경우
         }
-        else if(yootsum == 2)
+        else if(yutsum == 2)
         {
             return GAE;// 개가 나온 경우
         }
-        else if(yootsum == 1)
+        else if(yutsum == 1)
         {
-            if(yootSticks[0] == 1)
+            if(yutSticks[0] == 1)
             {
                 return BACKDO;// 0번 윷이 평평한면이 나오면 빽도가 나온 경우
             }
