@@ -70,40 +70,96 @@ public class RuleEngine {
                 }
             }else if(isDiagonal){
                 int temp = index % 10;
-                if(temp == 1 && index < boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add((index + yut) / 10);
-                        case 1 -> possibleLocation.add(index + yut);
-                        case 2 -> possibleLocation.add(boardType*50);
-                        case 3 -> possibleLocation.add(boardType*50 + 1);
-                        case 4 -> possibleLocation.add(boardType*50 + 2);
-                        case 5 -> possibleLocation.add(0);
+                if(boardType == 4){
+                    if(temp == 1 && index < 150){
+                        switch(yut){
+                            case -1:
+                                possibleLocation.add((index + yut) / 10);
+                                break;
+                            case 1:
+                                possibleLocation.add(index + yut);
+                                break;
+                            case 2:
+                                possibleLocation.add(boardType*50);
+                                break;
+                            case 3:
+                                possibleLocation.add(index + 100);
+                                break;
+                            case 4:
+                                possibleLocation.add(index + 99);
+                                break;
+                            case 5:
+                                if(index == 51){
+                                    possibleLocation.add(15);
+                                } else{
+                                    possibleLocation.add(0);
+                                }
+                                break;
+                        }
+                    } else if(temp == 2 && index < 150){
+                        switch(yut){
+                            case -1:
+                                possibleLocation.add(index + yut);
+                                break;
+                            case 1:
+                                possibleLocation.add(boardType*50);
+                                break;
+                            case 2:
+                                possibleLocation.add(index + 100);
+                                break;
+                            case 3:
+                                possibleLocation.add(index + 99);
+                                break;
+                            case 4:
+                                if(index == 52){
+                                    possibleLocation.add(15);
+                                } else{
+                                    possibleLocation.add(0);
+                                }
+                                break;
+                            case 5:
+                                if(index == 52){
+                                    possibleLocation.add(16);
+                                } else{
+                                    isFinish = true;
+                                }
+                                break;
+                        }
+                    } else if(index == 152){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(index - yut);
+                            case 2, 3, 4, 5 -> possibleLocation.add(13 + yut);
+                        }
+                    } else if(index == 151){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index - yut);
+                            case 1, 2, 3, 4, 5 -> possibleLocation.add(14 + yut);
+                        }
+                    } else if(index == 201){
+                        switch(yut){
+                            case -1, 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(0);
+                            case 3, 4, 5 -> isFinish = true;
+                        }
+                    } else if(index == 202){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(0);
+                            case 2, 3, 4, 5 -> isFinish = true;
+                        }
                     }
-                } else if(temp == 2 && index < boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add(index + yut);
-                        case 1 -> possibleLocation.add(boardType*50);
-                        case 2 -> possibleLocation.add(boardType*50 + 1);
-                        case 3 -> possibleLocation.add(boardType*50 + 2);
-                        case 4 -> possibleLocation.add(0);
-                        case 5 -> isFinish = true;
-                    }
-                } else if(temp == 1 && index > boardType*50){
-                    switch(yut){
-                        case -1, 1 -> possibleLocation.add(index + yut);
-                        case 2 -> possibleLocation.add(0);
-                        case 3, 4, 5 -> isFinish = true;
-                    }
-                } else if(temp == 2 && index > boardType*50){
-                    switch(yut){
-                        case -1 -> possibleLocation.add(index + yut);
-                        case 1 -> possibleLocation.add(0);
-                        case 2, 3, 4, 5 -> isFinish = true;
-                    }
+                } else if(boardType == 5){
+                    System.out.println("not yet");
+                } else{
+                    System.out.println("not yet");
                 }
+                
             } else {
-                if(index + yut >= boardType*50){
+                if(index + yut > boardType*5){
                     isFinish = true;
+                } else if(index + yut == boardType*5) {
+                    possibleLocation.add(0);
                 } else{
                     possibleLocation.add(index + yut);
                 }
