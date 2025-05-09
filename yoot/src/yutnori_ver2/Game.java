@@ -134,12 +134,24 @@ public class Game {
             }
             for(Player opponent: players){
                 if(player.getId() != opponent.getId()){
-                    opponent.pieceCaught(moveTo);
+                    boolean extra = opponent.pieceCaught(moveTo);
+                    while (extra) {
+                        System.out.print("윷을 던지시겠습니까? (1: 랜덤, 2: 수동): ");
+                        int choice = scanner.nextInt();
+                        YutResult result = (choice == 2) ? YutThrower.throwManual() : YutThrower.throwRandom();
+                        yutResultAtTurn.add(result.getValue());
+                        extra = result.getType().hasExtraTurn();
+                    }
+                    System.out.println("이번 턴의 윷 결과 목록:");
+                    for (int i = 0; i < yutResultAtTurn.size(); i++) {
+                        System.out.println((i + 1) + ". " + yutResultAtTurn.get(i));
+                    }
                 }
             }
             player.pieceIndex[moveTo] += player.pieceIndex[selected];
             player.pieceIndex[selected] = 0;
         }
+
     }
 
 

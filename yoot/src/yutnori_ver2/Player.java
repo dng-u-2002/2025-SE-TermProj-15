@@ -36,9 +36,12 @@ public class Player {
         pieceAtStart--;
     }
 
-    public void pieceCaught(int index){
+    public boolean pieceCaught(int index){
         if(pieceIndex[index] != 0){
             pieceIndex[index] = 0;
+            return true;
+        } else{
+            return false;
         }
     }
     public void getPlayerInfo() {
