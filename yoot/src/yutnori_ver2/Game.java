@@ -91,8 +91,7 @@ public class Game {
             List<Integer> possibleLocation = printResult.getPossibleLocation();
             //들어가는 것 문제
             if(printResult.isFinish){
-                player.goal(player.pieceIndex[selected]);
-                player.pieceIndex[selected] = 0;
+
                 List<Integer> finishableYut = new ArrayList<>();
                 int count = 0;
                 if(yutResultAtTurn.size() > 1){
@@ -103,11 +102,16 @@ public class Game {
                         }
                         count++;
                     }
+                    System.out.println("Select yut to finish: ");
+                    count = scanner.nextInt();
+                    yutResultAtTurn.remove(finishableYut.get(count));
+                    player.goal(player.pieceIndex[selected]);
+                    player.pieceIndex[selected] = 0;
+                    continue;
                 }
-                System.out.println("Select yut to finish: ");
-                count = scanner.nextInt();
-                yutResultAtTurn.remove(finishableYut.get(count));
-                continue;
+                player.goal(player.pieceIndex[selected]);
+                player.pieceIndex[selected] = 0;
+
             }
 
             //실제 이동
@@ -127,7 +131,7 @@ public class Game {
             }
             int removeIndex = possibleLocation.indexOf(moveTo);
             if(player.pieceNum - player.pieceAtEnd == player.pieceAtStart && selected == 999 && moveTo == -1){
-                continue;
+                break;
             }
             possibleLocation.remove(removeIndex);
             yutResultAtTurn.remove(removeIndex);
