@@ -57,16 +57,16 @@ public class RuleEngine {
                     case -1 -> possibleLocation.add(index + yut);
                     case 1, 2 -> possibleLocation.add(index*10 + yut);
                     case 3 -> possibleLocation.add(boardType*50);
-                    case 4 -> possibleLocation.add((-2*index*index + 1030*index + 10100) / 100);
-                    case 5 -> possibleLocation.add((2 * index*index + 970*index + 10200) / 100);
+                    case 4 -> possibleLocation.add((251*index*index*index - 6795*index*index + 58000*index) / 750);
+                    case 5 -> possibleLocation.add((252*index*index*index - 6795*index*index + 57825*index) / 750);
                 }
             } else if(isCorner && boardType == 6){ // 육각형 코너
                 switch(yut){
                     case -1 -> possibleLocation.add(index + yut);
                     case 1, 2 -> possibleLocation.add(index*10 + yut);
                     case 3 -> possibleLocation.add(boardType*50);
-                    case 4 -> possibleLocation.add((-index*index*index + 30*index*index + 7225*index + 77250) / 750);
-                    case 5 -> possibleLocation.add((-index*index*index - 30*index*index + 7775*index + 75000) / 750);
+                    case 4 -> possibleLocation.add((-98*index*index*index + 3675*index*index - 37975*index + 299250) / 750);
+                    case 5 -> possibleLocation.add((-102*index*index*index + 3825*index*index - 39525*index + 303000) / 750);
                 }
             }else if(isDiagonal){
                 int temp = index % 10;
