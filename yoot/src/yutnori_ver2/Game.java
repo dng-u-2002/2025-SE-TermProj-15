@@ -127,11 +127,6 @@ public class Game {
             int removeIndex = possibleLocation.indexOf(moveTo);
             possibleLocation.remove(removeIndex);
             yutResultAtTurn.remove(removeIndex);
-            if(selected == 999){
-                player.pieceIndex[moveTo] = 1;
-                player.exitStart();
-                continue;
-            }
             for(Player opponent: players){
                 if(player.getId() != opponent.getId()){
                     boolean extra = opponent.pieceCaught(moveTo);
@@ -147,6 +142,11 @@ public class Game {
                         System.out.println((i + 1) + ". " + yutResultAtTurn.get(i));
                     }
                 }
+            }
+            if(selected == 999){
+                player.pieceIndex[moveTo]++;
+                player.exitStart();
+                continue;
             }
             player.pieceIndex[moveTo] += player.pieceIndex[selected];
             player.pieceIndex[selected] = 0;

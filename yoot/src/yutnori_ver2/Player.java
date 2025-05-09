@@ -39,6 +39,7 @@ public class Player {
     public boolean pieceCaught(int index){
         if(pieceIndex[index] != 0){
             pieceIndex[index] = 0;
+            System.out.println("잡았다");
             return true;
         } else{
             return false;
