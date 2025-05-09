@@ -125,6 +125,9 @@ public class Game {
                 System.out.println("잘못된 선택입니다.");
             }
             int removeIndex = possibleLocation.indexOf(moveTo);
+            if(player.pieceNum - player.pieceAtEnd == player.pieceAtStart && selected == 999 && moveTo == -1){
+                continue;
+            }
             possibleLocation.remove(removeIndex);
             yutResultAtTurn.remove(removeIndex);
             for(Player opponent: players){
