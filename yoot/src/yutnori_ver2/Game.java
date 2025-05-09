@@ -89,9 +89,9 @@ public class Game {
             //이동할 위치 출력
             RuleEngine printResult = new RuleEngine(selected, boardType, yutResultAtTurn);
             List<Integer> possibleLocation = printResult.getPossibleLocation();
+            //들어가는 것 문제
             if(printResult.isFinish){
-                player.goal();
-                player.pieceIndex[selected]--;
+
                 List<Integer> finishableYut = new ArrayList<>();
                 int count = 0;
                 if(yutResultAtTurn.size() > 1){
@@ -102,11 +102,16 @@ public class Game {
                         }
                         count++;
                     }
+                    System.out.println("Select yut to finish: ");
+                    count = scanner.nextInt();
+                    yutResultAtTurn.remove(finishableYut.get(count));
+                    player.goal(player.pieceIndex[selected]);
+                    player.pieceIndex[selected] = 0;
+                    continue;
                 }
-                System.out.println("Select yut to finish: ");
-                count = scanner.nextInt();
-                yutResultAtTurn.remove(finishableYut.get(count));
-                continue;
+                player.goal(player.pieceIndex[selected]);
+                player.pieceIndex[selected] = 0;
+
             }
 
             //실제 이동
@@ -125,13 +130,11 @@ public class Game {
                 System.out.println("잘못된 선택입니다.");
             }
             int removeIndex = possibleLocation.indexOf(moveTo);
+            if(player.pieceNum - player.pieceAtEnd == player.pieceAtStart && selected == 999 && moveTo == -1){
+                break;
+            }
             possibleLocation.remove(removeIndex);
             yutResultAtTurn.remove(removeIndex);
-            if(selected == 999){
-                player.pieceIndex[moveTo] = 1;
-                player.exitStart();
-                continue;
-            }
             for(Player opponent: players){
                 if(player.getId() != opponent.getId()){
                     boolean extra = opponent.pieceCaught(moveTo);
@@ -147,6 +150,11 @@ public class Game {
                         System.out.println((i + 1) + ". " + yutResultAtTurn.get(i));
                     }
                 }
+            }
+            if(selected == 999){
+                player.pieceIndex[moveTo]++;
+                player.exitStart();
+                continue;
             }
             player.pieceIndex[moveTo] += player.pieceIndex[selected];
             player.pieceIndex[selected] = 0;

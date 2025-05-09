@@ -28,17 +28,16 @@ public class Player {
 
     //public int getPiecePlace() {}
 
-    public void goal(){
-        pieceAtEnd++;
+    public void goal(int num){
+        pieceAtEnd+= num;
     }
 
-    public void exitStart(){
-        pieceAtStart--;
-    }
+    public void exitStart(){ pieceAtStart --; }
 
     public boolean pieceCaught(int index){
         if(pieceIndex[index] != 0){
             pieceIndex[index] = 0;
+            System.out.println("잡았다");
             return true;
         } else{
             return false;
