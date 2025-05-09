@@ -89,9 +89,10 @@ public class Game {
             //이동할 위치 출력
             RuleEngine printResult = new RuleEngine(selected, boardType, yutResultAtTurn);
             List<Integer> possibleLocation = printResult.getPossibleLocation();
+            //들어가는 것 문제
             if(printResult.isFinish){
-                player.goal();
-                player.pieceIndex[selected]--;
+                player.goal(player.pieceIndex[selected]);
+                player.pieceIndex[selected] = 0;
                 List<Integer> finishableYut = new ArrayList<>();
                 int count = 0;
                 if(yutResultAtTurn.size() > 1){
