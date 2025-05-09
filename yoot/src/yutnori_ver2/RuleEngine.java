@@ -21,7 +21,7 @@ public class RuleEngine {
             isStart = true;
         }else if(index == 50*boardType){
             isCenter = true;
-        } else if(index % 5 == 0){
+        } else if(index % 5 == 0 && (boardType - 1) * 5 != index){
             isCorner = true;
         } else if(index >= 50){
             isDiagonal = true;
@@ -44,15 +44,31 @@ public class RuleEngine {
                     case -1 -> possibleLocation.add(boardType*50 - 1);
                     case 1, 2, 3, 4, 5 -> isFinish = true;
                 }
-            } else if(isCorner){        //일단 가운데로 가도록 만들어둠
+            } else if(isCorner && boardType == 4){ // 사각형 코너
                 switch(yut){
                     case -1 -> possibleLocation.add(index + yut);
                     case 1, 2 -> possibleLocation.add(index*10 + yut);
                     case 3 -> possibleLocation.add(boardType*50);
-                    case 4 -> possibleLocation.add(boardType*50 + 1);
-                    case 5 -> possibleLocation.add(boardType*50 + 2);
+                    case 4 -> possibleLocation.add((index+10)*10 + (index % 2)+1);
+                    case 5 -> possibleLocation.add((index+10)*10 + (index / 5));
                 }
-            } else if(isDiagonal){
+            } else if(isCorner && boardType == 5){ // 오각형 코너
+                switch(yut){
+                    case -1 -> possibleLocation.add(index + yut);
+                    case 1, 2 -> possibleLocation.add(index*10 + yut);
+                    case 3 -> possibleLocation.add(boardType*50);
+                    case 4 -> possibleLocation.add((-2*index*index + 1030*index + 10100) / 100);
+                    case 5 -> possibleLocation.add((2 * index*index + 970*index + 10200) / 100);
+                }
+            } else if(isCorner && boardType == 6){ // 육각형 코너
+                switch(yut){
+                    case -1 -> possibleLocation.add(index + yut);
+                    case 1, 2 -> possibleLocation.add(index*10 + yut);
+                    case 3 -> possibleLocation.add(boardType*50);
+                    case 4 -> possibleLocation.add((-index*index*index + 30*index*index + 7225*index + 77250) / 750);
+                    case 5 -> possibleLocation.add((-index*index*index - 30*index*index + 7775*index + 75000) / 750);
+                }
+            }else if(isDiagonal){
                 int temp = index % 10;
                 if(temp == 1 && index < boardType*50){
                     switch(yut){
