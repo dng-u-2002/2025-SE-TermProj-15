@@ -9,7 +9,7 @@ public class Yut {
     public static final int DO = 1;     // 도: 1칸 전진
     public static final int GAE = 2;    // 개: 2칸 전진
     public static final int GUL = 3;    // 걸: 3칸 전진
-    public static final int YOOT = 4;   // 윷: 4칸 전진
+    public static final int YUT = 4;   // 윷: 4칸 전진
     public static final int MO = 5;     // 모: 5칸 전진
 
     public static final int SIDE_FLAT = 1;      // 평평한 면을 나타내는 플래그 변수
@@ -17,7 +17,7 @@ public class Yut {
 
     private static final float PROB_FLAT = 0.6f;        // 평평한 면이 나올 확률, 대체로  평평한 면이 나올 확률이 60%, 둥근 면이 나올 확률을 40%로 한다.
 
-    private static int[] yutSticks = new int[4];       //윷가락을 4개로 하고 yootSticks[0]을 빽도가 있는 윷가락으로 설정한다.
+    private static int[] yutSticks = new int[4];       //윷가락을 4개로 하고 yutSticks[0]을 빽도가 있는 윷가락으로 설정한다.
 
 
     public static int yutRandom() {
@@ -34,7 +34,7 @@ public class Yut {
         }
         if(yutsum == 4)
         {
-            return YOOT;// 윷이 나온 경우
+            return YUT;// 윷이 나온 경우
         }
         else if(yutsum == 3)
         {
