@@ -211,13 +211,69 @@ public class RuleEngine {
                             case 2, 3, 4, 5 -> isFinish = true;
                         }
                     }
-
-
-
-                } else{
-                    System.out.println("not yet");
+                } else{         //육각형
+                    if(temp == 1 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(252);
+                            case 4 -> possibleLocation.add(251);
+                            case 5 -> possibleLocation.add(25);
+                        }
+                    } else if(temp == 2 && index < 150){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(252);
+                            case 3 -> possibleLocation.add(251);
+                            case 4 -> possibleLocation.add(25);
+                            case 5 -> possibleLocation.add(26);
+                        }
+                    } else if(temp == 1 && index > 150 && index < 250){
+                        switch (yut){
+                            case -1 -> possibleLocation.add((index + yut) / 10);
+                            case 1 -> possibleLocation.add(index + yut);
+                            case 2 -> possibleLocation.add(boardType*50);
+                            case 3 -> possibleLocation.add(301);
+                            case 4 -> possibleLocation.add(302);
+                            case 5 -> possibleLocation.add(0);
+                        }
+                    } else if(temp == 2 && index > 150 && index < 250){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(301);
+                            case 3 -> possibleLocation.add(302);
+                            case 4 -> possibleLocation.add(0);
+                            case 5 -> isFinish = true;
+                        }
+                    } else if(index == 252){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(251);
+                            case 2, 3, 4, 5 -> possibleLocation.add(23 + yut);
+                        }
+                    } else if(index == 251){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(252);
+                            case 1, 2, 3, 4, 5 -> possibleLocation.add(24 + yut);
+                        }
+                    } else if(index == 301){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(boardType*50);
+                            case 1 -> possibleLocation.add(302);
+                            case 2 -> possibleLocation.add(0);
+                            case 3, 4, 5 -> isFinish = true;
+                        }
+                    } else if(index == 302){
+                        switch (yut){
+                            case -1 -> possibleLocation.add(301);
+                            case 1 -> possibleLocation.add(0);
+                            case 2, 3, 4, 5 -> isFinish = true;
+                        }
+                    }
                 }
-                
             } else {
                 if(index + yut > boardType*5){
                     isFinish = true;
