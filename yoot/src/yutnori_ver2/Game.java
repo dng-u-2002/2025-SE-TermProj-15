@@ -125,6 +125,7 @@ public class Game {
                 );
             }
         }
+        
         if(!backStart) {
         	// 윷 결과 목록 표시
             StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
@@ -243,12 +244,25 @@ public class Game {
         updateGameStatus("플레이어 " + currentPlayer.getId() + "의 말이 위치 " + position + "로 이동했습니다.");
         boardPanel.clearPossibleMoves();
         updateBoard();
+       
 
         // 현재 플레이어가 승리했는지 확인
         if (currentPlayer.hasWon()) {
             // 게임 종료 - 남은 윷 결과와 관계없이 승리
             handleVictory(currentPlayer);
             return;
+        }
+        
+        if(currentPlayer.allStart() && yutResult.get(0) == -1 && yutResult.size() == 1) {
+        	yutResult.clear();
+        	JOptionPane.showMessageDialog(
+        			yutScreen,
+        			"빽도(가) 남아 건너뜁니다!",
+        			"상대방 턴",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        	nextPlayerTurn();
+        	updateBoard();
         }
 
         // 잡기로 인한 추가 턴이 없으면 남은 윷 결과 처리 또는 다음 플레이어 턴
@@ -382,6 +396,8 @@ public class Game {
         if (yutResult.isEmpty()) {
             // 모든 윷 결과 사용 완료, 다음 플레이어 턴
             nextPlayerTurn();
+        } else if(yutResult.size() == 1 && yutResult.get(0) == -1) {
+        	nextPlayerTurn();
         } else {
             // 남은 윷 결과가 있음, 말 선택 계속
             currentState = GameState.WAITING_FOR_PIECE_SELECTION;
