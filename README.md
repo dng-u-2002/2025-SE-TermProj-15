@@ -30,6 +30,11 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 #### ▶ Hexagon Board Path Example  
 ![Hexagon Path](Hexagon_logic.jpg)
 
+
+## ⚙️ Special Movement Rules  
+- **중앙 진입 시 멈춤**: 말이 중심 노드에 정확히 도착해 멈출 경우, 결승점까지의 거리가 가장 짧은 경로를 자동으로 선택합니다.  
+- **중앙 통과 시 회전 방향 선택**: 중심 노드를 지나칠 경우, 꺾이는 각도가 가장 작고 결승점까지의 거리가 짧은 경로를 우선적으로 선택합니다.
+
 ## 📅 Project Timeline  
 ### ✅ First Due (5th April)  
 - Create a **GitHub project page** and post it on the e-class project board.  
@@ -76,7 +81,7 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
  ┗ 📄 vcs.xml
 
 📁 yoot/
- ┗ 📁 .idea/
+ ┣ 📁 .idea/
    ┣ 📄 .gitignore
    ┣ 📄 .name
    ┣ 📄 misc.xml
@@ -84,31 +89,32 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
    ┣ 📄 uiDesigner.xml
    ┗ 📄 vcs.xml
 
-📁 src/
- ┗ 📁 yutnori_ver2/
-   ┣ 📄 BoardPanel.java
-   ┣ 📄 Game.java
-   ┣ 📄 Main.java
-   ┣ 📄 Player.java
-   ┣ 📄 RuleEngine.java
-   ┣ 📄 StartFrame.java
-   ┣ 📄 Yut.java
-   ┣ 📄 YutResult.java
-   ┣ 📄 YutResultType.java
-   ┣ 📄 YutScreen.java
-   ┣ 📄 YutThrower.java
-   ┗ 📄 YutNori.exe
-
-📄 .gitignore
-📄 yoot.iml
+ ┣ 📁 src/
+    ┣ 📁 yutnori_ver2/
+      ┣ 📄 BoardPanel.java
+      ┣ 📄 Game.java
+      ┣ 📄 Main.java
+      ┣ 📄 Player.java
+      ┣ 📄 RuleEngine.java
+      ┣ 📄 StartFrame.java
+      ┣ 📄 Yut.java
+      ┣ 📄 YutResult.java
+      ┣ 📄 YutResultType.java
+      ┣ 📄 YutScreen.java
+      ┗ 📄 YutThrower.java
+    ┗ 📄 YutNori.exe
+ ┣ 📄 .gitignore
+ ┗ 📄 yoot.iml
 📄 .classpath
 📄 .project
 📄 2025-SE-TermProj-15.iml
+📄 Hexagon_logic.jpg
+📄 Pentagon_logic.jpg
 📄 README.md
 ```
 
 ## 역할분담  
-- 문서화 및 UML: 김영준, 양희옥  
+- 문서화 및 UML: 김영준, 양희목  
 - UI 개발: 이규빈, 하동윤  
 - Logic 개발: 김동우, 하동윤
 
