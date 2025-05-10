@@ -95,6 +95,10 @@ public class Game {
         while (extra) {
             YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
             yutResult.add(result.getValue());
+            Player currentPlayer = getCurrentPlayer();
+            if(currentPlayer.allStart() && result.getValue() == -1) {
+            	nextPlayerTurn();
+            }
 
             // 화면에 윷 결과 표시
             yutScreen.displayYutResult(result.getType().getDisplayName());
