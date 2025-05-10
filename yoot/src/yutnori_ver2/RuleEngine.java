@@ -34,7 +34,7 @@ public class RuleEngine {
                 possibleLocation.add(yut);
             } else if(isCenter){
                 switch(yut){
-                    case -1 -> possibleLocation.add(boardType * 50 - 1 ); //빽도 구현 미완성 지점
+                    case -1 -> possibleLocation.add(boardType * 5 - 1 ); //빽도 구현 미완성 지점
                     case 1, 2 -> possibleLocation.add(index + yut);
                     case 3 -> possibleLocation.add(0);
                     case 4, 5 -> isFinish = true;
