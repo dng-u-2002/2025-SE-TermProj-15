@@ -92,15 +92,23 @@ public class Game {
         
 
         boolean extra = true;
-        boolean startBack = false;
-        while (extra && !startBack) {
+        boolean backStart = false;
+        while (extra && !backStart) {
             YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
-            if(currentPlayer.allStart() && result.getValue() == -1) {
+            if(currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
             	yutScreen.displayYutResult(result.getType().getDisplayName());
+            	yutResult.clear();
+            	JOptionPane.showMessageDialog(
+            			yutScreen,
+            			result.getType().getDisplayName() + "(가) 나와 건너뜁니다!",
+            			"상대방 턴",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
             	nextPlayerTurn();
-            	startBack = true;
+            	updateBoard();
+            	backStart = true;
             }
 
             // 화면에 윷 결과 표시
@@ -117,23 +125,25 @@ public class Game {
                 );
             }
         }
+        if(!backStart) {
+        	// 윷 결과 목록 표시
+            StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
+            for (int i = 0; i < yutResult.size(); i++) {
+                resultMsg.append((i + 1)).append(". ").append(yutResult.get(i)).append("\n");
+            }
+            updateGameStatus(resultMsg.toString());
 
-        // 윷 결과 목록 표시
-        StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
-        for (int i = 0; i < yutResult.size(); i++) {
-            resultMsg.append((i + 1)).append(". ").append(yutResult.get(i)).append("\n");
+            // 상태 변경: 말 선택 대기
+            currentState = GameState.WAITING_FOR_PIECE_SELECTION;
+
+            // 현재 플레이어의 말 상태 표시
+            updateGameStatus(resultMsg + "\n플레이어 " + getCurrentPlayer().getId() +
+                    "의 차례입니다. 이동할 말을 선택하세요.");
+
+            // 보드 업데이트
+            updateBoard();
         }
-        updateGameStatus(resultMsg.toString());
-
-        // 상태 변경: 말 선택 대기
-        currentState = GameState.WAITING_FOR_PIECE_SELECTION;
-
-        // 현재 플레이어의 말 상태 표시
-        updateGameStatus(resultMsg + "\n플레이어 " + getCurrentPlayer().getId() +
-                "의 차례입니다. 이동할 말을 선택하세요.");
-
-        // 보드 업데이트
-        updateBoard();
+        
     }
 
     // 사용자가 보드에서 말을 선택했을 때 호출되는 메서드
