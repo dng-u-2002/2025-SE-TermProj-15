@@ -97,6 +97,7 @@ public class Game {
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
             if(currentPlayer.allStart() && result.getValue() == -1) {
+            	yutScreen.displayYutResult(result.getType().getDisplayName());
             	nextPlayerTurn();
             }
 
