@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class YutThrower {
 
     // 윷을 던져서 나온 값에 해당하는 플래그
-    public static final int BACKDO = -1;    // 빽도: 1칸 뒤로
+    public static final int BACKDO = 0;    // 빽도: 1칸 뒤로
     public static final int DO = 1;     // 도: 1칸 전진
     public static final int GAE = 2;    // 개: 2칸 전진
     public static final int GUL = 3;    // 걸: 3칸 전진
