@@ -89,6 +89,7 @@ public class Game {
                 options,
                 options[0]
         );
+        
 
         boolean extra = true;
         while (extra) {
@@ -97,7 +98,12 @@ public class Game {
 
             // 화면에 윷 결과 표시
             yutScreen.displayYutResult(result.getType().getDisplayName());
-            
+            Player currentPlayer = getCurrentPlayer();
+            if(result.getValue() == -1 && currentPlayer.pieceNum == currentPlayer.pieceAtStart ) {
+            	updateGameStatus("시작점에서 빽도가 나왔습니다. 다음 사람이 던집니다");
+            	nextPlayerTurn();
+                return;
+            } 
             extra = result.getType().hasExtraTurn();
             if (extra) {
                 // 추가 턴이 있는 경우 메시지 표시
@@ -140,10 +146,6 @@ public class Game {
         if (position == 999) {
             if (currentPlayer.pieceAtStart <= 0) {
                 updateGameStatus("시작점에 말이 없습니다. 다른 말을 선택하세요.");
-                return;
-            } else if(currentPlayer.pieceNum == currentPlayer.pieceAtStart) {
-            	updateGameStatus("시작점에서 빽도가 나왔습니다. 다음 사람이 던집니다");
-            	nextPlayerTurn();
                 return;
             } else if(currentPlayer.allStart()) {
             	updateGameStatus("시작점에서 빽도를 고를 수 없습니다. 다른 말을 선택하세요.");
