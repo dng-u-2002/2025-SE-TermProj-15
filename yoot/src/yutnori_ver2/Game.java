@@ -17,6 +17,7 @@ public class Game {
         this.piecesPerPlayer = piecesPerPlayer;
         this.boardType = boardType;
         System.out.println("게임을 시작합니다. 플레이어 수: " + numPlayers + ", 말 개수: " + piecesPerPlayer + ", 판 형태: " + boardType);
+        new YutScreen(boardType);
         startGame();
     }
 
