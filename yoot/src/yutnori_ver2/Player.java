@@ -24,6 +24,10 @@ public class Player {
     public int getId() {
         return id;
     }
+    
+    public boolean allStart() {
+    	return pieceAtStart + pieceAtEnd == pieceNum;
+    }
 
 
     //public int getPiecePlace() {}

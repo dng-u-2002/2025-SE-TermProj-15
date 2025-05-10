@@ -1,3 +1,5 @@
+import yutnori_ver2.BoardPanel;
+
 import javax.swing.*;
 import java.util.Objects;
 
