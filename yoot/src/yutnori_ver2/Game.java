@@ -92,13 +92,15 @@ public class Game {
         
 
         boolean extra = true;
-        while (extra) {
+        boolean startBack = false;
+        while (extra && !startBack) {
             YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
             if(currentPlayer.allStart() && result.getValue() == -1) {
             	yutScreen.displayYutResult(result.getType().getDisplayName());
             	nextPlayerTurn();
+            	startBack = true;
             }
 
             // 화면에 윷 결과 표시
