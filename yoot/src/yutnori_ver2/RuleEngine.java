@@ -30,18 +30,18 @@ public class RuleEngine {
 
     public List<Integer> getPossibleLocation(){
         for(int yut: yutResult){
-            if(isStart){
+            if(isStart && yut != -1){
                 possibleLocation.add(yut);
             } else if(isCenter){
                 switch(yut){
-                    case -1 -> possibleLocation.add(boardType * 50 - 1 ); //빽도 구현 미완성 지점
+                    case -1 -> possibleLocation.add(52); //빽도 구현 미완성 지점
                     case 1, 2 -> possibleLocation.add(index + yut);
                     case 3 -> possibleLocation.add(0);
                     case 4, 5 -> isFinish = true;
                 }
             } else if(index == 0){
                 switch(yut){
-                    case -1 -> possibleLocation.add(boardType*50 - 1);
+                    case -1 -> possibleLocation.add(boardType*5 - 1);
                     case 1, 2, 3, 4, 5 -> isFinish = true;
                 }
             } else if(isCorner && boardType == 4){ // 사각형 코너
