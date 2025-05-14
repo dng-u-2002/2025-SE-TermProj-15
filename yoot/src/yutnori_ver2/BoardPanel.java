@@ -33,10 +33,10 @@ public class BoardPanel extends JPanel {
 
     BoardPanel(int newPoint) {
         this.point = newPoint;
-        this.arrX = new int[point];
-        this.arrY = new int[point];
-        this.locationX = new int[point*100];
-        this.locationY = new int[point*100];
+        this.arrX = new int[point*2];
+        this.arrY = new int[point*2];
+        this.locationX = new int[point*200];
+        this.locationY = new int[point*200];
 
         this.setPreferredSize(new Dimension(n, n));
         this.setBackground(new Color(245, 245, 220)); // 베이지색 배경
@@ -53,8 +53,8 @@ public class BoardPanel extends JPanel {
     }
 
     BoardPanel() {
-        this.arrX = new int[point];
-        this.arrY = new int[point];
+        this.arrX = new int[point*2];
+        this.arrY = new int[point*2];
         this.locationX = new int[point*100];
         this.locationY = new int[point*100];
 
@@ -135,7 +135,7 @@ public class BoardPanel extends JPanel {
                 }
 
                 // 출발 표기
-                if(i == 0) {
+                if(i == 5*point) {
                     g2D.setFont(new Font("맑은 고딕", Font.BOLD, 12));
                     g2D.drawString("출발", locationX[i] - 12, locationY[i] + 6);
                 }
@@ -343,27 +343,51 @@ public class BoardPanel extends JPanel {
     }
 
     public void setEdges(){                             //각 원의 위치 구하기
+    	locationX[5*point] = arrX[0];
+    	locationY[5*point] = arrY[0];
+    	arrX[point] = arrX[0];
+    	arrY[point] = arrY[0];
         for(int i = 0; i < point; i++){
-            int next = (i+1) % point;
+            int next = i+1;
+            int t2 = point;
+            int t1 = point-1;
             locationX[5*i] = arrX[i];       //꼭짓점 좌표 저장
             locationY[5*i] = arrY[i];
             for(int j = 1; j<5; j++){       //도형의 선분 위에 있는 점들 내분점 공식으로 구해줌
                 locationX[5*i + j] = (j*arrX[next] + (5-j)*arrX[i])/5;
                 locationY[5*i + j] = (j*arrY[next] + (5-j)*arrY[i])/5;
             }
-            if(i != 0){     //도형 내부에 있는 원들 내분점 공식 이용해 위치 특정
-                locationX[50*i + 1] = (2*arrX[i] + center)/3;
-                locationX[50*i + 2] = (arrX[i] + 2*center)/3;
-                locationY[50*i + 1] = (2*arrY[i] + center)/3;
-                locationY[50*i + 2] = (arrY[i] + 2*center)/3;
-            } else{     //출발점과 중심점에 해당하는 원들의 좌표
-                locationX[50*point] = center;
-                locationX[50*point + 1] = (arrX[i] + 2*center)/3;
-                locationX[50*point + 2] = (2*arrX[i] + center)/3;
-                locationY[50*point] = center;
-                locationY[50*point + 1] = (arrY[i] + 2*center)/3;
-                locationY[50*point + 2] = (2*arrY[i] + center)/3;
+            next = i + 1;
+            if(next <= point - 2){     //도형 내부에 있는 원들 내분점 공식 이용해 위치 특정
+                locationX[50*next + 1] = (2*arrX[next] + center)/3;
+                locationX[50*next + 3] = (arrX[next] + 2*center)/3;
+                locationY[50*next + 1] = (2*arrY[next] + center)/3;
+                locationY[50*next + 3] = (arrY[next] + 2*center)/3;
+                locationX[50*next + 5] = center;
+                locationY[50*next + 5] = center;
+                int fin = 0;
+                boolean even = point % 2 == 0;
+                if(even) {
+                	if((point-2)/2 >= next) {
+                    	fin = t1;
+                    } else {
+                    	fin = t2;
+                    }
+                } else {
+                	if((int)Math.ceil((point-2)/2) >= next) {
+                    	fin = t1;
+                    } else {
+                    	fin = t2;
+                    }
+                }
+                locationX[50*next + 7] = (arrX[fin] + 2*center)/3;
+                locationX[50*next + 9] = (2*arrX[fin] + center)/3;
+         
+                locationY[50*next + 7] = (arrY[fin] + 2*center)/3;
+                locationY[50*next + 9] = (2*arrY[fin] + center)/3;
+                
             }
+            
         }
     }
 
