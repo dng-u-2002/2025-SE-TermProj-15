@@ -1,4 +1,3 @@
-package yutnori_ver2;
 public class Player {
     private final int id;
     public int pieceNum;
@@ -13,7 +12,7 @@ public class Player {
         this.pieceAtStart = pieceNum;
         this.pieceAtEnd = 0;
         this.boardType = gameType;
-        this.pieceIndex = new int[gameType*100];
+        this.pieceIndex = new int[gameType*200];
         System.out.println("player " + id + " entered");
     }
 
@@ -29,9 +28,6 @@ public class Player {
     	return pieceAtStart + pieceAtEnd == pieceNum;
     }
 
-
-    //public int getPiecePlace() {}
-
     public void goal(int num){ pieceAtEnd+= num; }
 
     public void exitStart(){ pieceAtStart --; }
@@ -46,10 +42,20 @@ public class Player {
             return false;
         }
     }
+
+    public int[] getPiecelocation(){ return pieceIndex; }
+
+    public int[] setPiecelocation(int[] nextPiecelocation){
+        pieceIndex = nextPiecelocation;
+        return pieceIndex;
+    }
+
+    public void addPieceAtIndex(int location, int num){ pieceIndex[location] += num; }
+
     public void getPlayerInfo() {
         System.out.println("player" + id + "pieceNum: " + pieceNum);
         System.out.println("starting: " + pieceAtStart + ", ended: " + pieceAtEnd);
-        for (int i = 0; i < boardType*100; i++){
+        for (int i = 0; i < boardType*200; i++){
             if(pieceIndex[i] != 0){
                 System.out.println(pieceIndex[i] + "piece(s) at" + i);
             }

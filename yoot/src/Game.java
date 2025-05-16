@@ -1,9 +1,6 @@
-package yutnori_ver2;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
-import java.awt.*;
 
 public class Game {
     public int numPlayers, piecesPerPlayer, boardType;
@@ -32,7 +29,7 @@ public class Game {
     private GameState currentState = GameState.WAITING_FOR_YUT;
 
     public Game(int numPlayers, int piecesPerPlayer, int boardType) {
-        this.players = new java.util.ArrayList<>();
+        this.players = new ArrayList<>();
         this.numPlayers = numPlayers;
         this.piecesPerPlayer = piecesPerPlayer;
         this.boardType = boardType;
@@ -76,6 +73,7 @@ public class Game {
         }
 
         yutResult.clear(); // 이전 결과 초기화
+
 
         // 윷 던지기 다이얼로그 표시
         Object[] options = {"랜덤", "수동"};
@@ -152,7 +150,6 @@ public class Game {
         if (currentState != GameState.WAITING_FOR_PIECE_SELECTION) {
             return; // 현재 상태가 말 선택 대기 상태가 아니면 무시
         }
-
         Player currentPlayer = getCurrentPlayer();
 
         // 선택한 위치가 시작점인 경우(999)
@@ -458,14 +455,13 @@ public class Game {
         boardPanel.clearPieces(); // 기존 말 지우기
 
         for (Player player : players) {
-            for (int i = 0; i < boardType*100; i++) {
+            for (int i = 0; i < boardType*200; i++) {
                 if (player.pieceIndex[i] > 0) {
                     // 플레이어 ID와 말 개수 정보로 보드 업데이트
                     boardPanel.addPiece(i, player.getId(), player.pieceIndex[i]);
                 }
             }
         }
-
         boardPanel.repaint();
     }
 

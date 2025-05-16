@@ -1,4 +1,3 @@
-package yutnori_ver2;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class RuleEngine {
         this.yutResult = yutResult;
         if(index == 999){
             isStart = true;
-        }else if(index >= 5*boardType && index % 5 == 0){
+        }else if(index > 5*boardType && index % 5 == 0){
             isCenter = true;
         } else if(index % 5 == 0 && index/5 < boardType/2 + 1){
             isCorner = true;
@@ -34,6 +33,7 @@ public class RuleEngine {
             if(isStart && yut != -1){
                 possibleLocation.add(yut);
             } else if(isCenter){
+                index = (boardType - 3)*50 + 5;
                 if((yut*2 + index)%10 != yut%10 && (yut*2 + index)%10 == 1){
                     possibleLocation.add(5*boardType);
                 } else if((yut*2 + index)%10 != yut%10 ){
@@ -58,7 +58,9 @@ public class RuleEngine {
                     possibleLocation.add((index + yut)/10);
                 } else if(result / 10 != index /10){
                 	boolean even = boardType % 2 == 0;
-                    if(even && (boardType-2)/2 <= index/50) {
+                    if(result%10 == 1 && even && (boardType-2)/2 <= index/50){
+                        possibleLocation.add(5*boardType - 5);
+                    } else if(even && (boardType-2)/2 <= index/50) {
                     	possibleLocation.add((result/10+1)/2+boardType*5 -6);
                     } else if((int)Math.ceil((boardType-2)/2) <= index/50){
                     	possibleLocation.add((result/10+1)/2+boardType*5 -6);
@@ -83,17 +85,10 @@ public class RuleEngine {
     }
 
     public boolean finishAble(int yut){
-        boolean finish = false;
-        int result = index + yut*2;
-        if(isCenter && yut > 3){
-            finish = true;
-        } else if(index == 5*boardType && yut != -1){
-            finish = true;
-        } else if(isDiagonal && result/10 != index/10 && result%10 != 1){
-            finish = true;
-        } else if(index + yut > 5*boardType){
-            finish = true;
-        }
-        return finish;
+        List<Integer> yutOne = new ArrayList<>();
+        yutOne.add(yut);
+        RuleEngine finish = new RuleEngine(index, boardType, yutOne);
+        finish.getPossibleLocation();
+        return finish.isFinish;
     }
 }

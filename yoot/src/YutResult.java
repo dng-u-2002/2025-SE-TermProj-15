@@ -1,5 +1,3 @@
-package yutnori_ver2;
-
 public class YutResult {
     private YutResultType type;
     private int value;
