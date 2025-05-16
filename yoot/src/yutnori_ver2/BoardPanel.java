@@ -101,7 +101,7 @@ public class BoardPanel extends JPanel {
         }
 
         // 경로 위의 원 그리기
-        for(int i = 0; i < point*100; i++) {
+        for(int i = 0; i < point*200; i++) {
             if(locationX[i] != 0) {
                 // 이동 가능한 위치 하이라이트
                 if (possibleMoveLocations.contains(i)) {
