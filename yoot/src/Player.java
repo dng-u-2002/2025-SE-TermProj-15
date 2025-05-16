@@ -1,4 +1,3 @@
-package yutnori_ver2;
 public class Player {
     private final int id;
     public int pieceNum;

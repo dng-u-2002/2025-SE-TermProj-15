@@ -1,9 +1,6 @@
-package yutnori_ver2;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
-import java.awt.*;
 
 public class Game {
     public int numPlayers, piecesPerPlayer, boardType;
