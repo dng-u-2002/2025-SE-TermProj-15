@@ -113,7 +113,7 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 📄 README.md
 ```
 
-## 역할분담  
+## 역할 분담  
 - 문서화 및 UML: 김영준, 양희목  
 - UI 개발: 이규빈, 하동윤  
 - Logic 개발: 김동우, 하동윤
@@ -122,3 +122,8 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 - 5/3 UML 작성 완료  
 - 5/8 Java Swing 구현 완료
 - 5/10 제출
+
+## 2차 데드라인
+- 5월 말 UI 추가로 하나 더 작성. (JavaFX로 진행)
+- 5월 말 프로젝트 문서 작성. (개요, Use-Case Model, 설계 및 구현 리포트, 테스트 리포트, Github 프로젝트 리포트)
+- 6월 초 Presentation
