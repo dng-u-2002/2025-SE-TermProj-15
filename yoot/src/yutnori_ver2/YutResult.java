@@ -2,14 +2,14 @@ package yutnori_ver2;
 
 public class YutResult {
     private YutResultType type;
-    private int value;
-    private boolean isUsed;
+       private int value;
+        private boolean isUsed;
 
     public YutResult(YutResultType type) {
-        this.type = type;
-        this.value = type.getValue();
-        this.isUsed = false;
-    }
+            this.type = type;
+            this.value = type.getValue();
+            this.isUsed = false;
+        }
 
     public YutResultType getType() {
         return type;
