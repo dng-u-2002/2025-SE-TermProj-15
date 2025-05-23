@@ -1,3 +1,5 @@
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class Game {
     public List<Integer> yutResult = new ArrayList<>();
 
     // GameUI 참조 추가
-    private GameUI gameUI;
+    private FXGameUI gameUI;
 
     // 현재 플레이어 인덱스 추가
     private int currentPlayerIndex = 0;
@@ -26,18 +28,20 @@ public class Game {
 
     private GameState currentState = GameState.WAITING_FOR_YUT;
 
-    public Game(int numPlayers, int piecesPerPlayer, int boardType) {
-        this.players = new java.util.ArrayList<>();
+    public Game(int numPlayers, int piecesPerPlayer, int boardType, Stage stage) {
+        this.players = new ArrayList<>();
         this.numPlayers = numPlayers;
         this.piecesPerPlayer = piecesPerPlayer;
         this.boardType = boardType;
+
         System.out.println("게임을 시작합니다. 플레이어 수: " + numPlayers + ", 말 개수: " + piecesPerPlayer + ", 판 형태: " + boardType);
 
-        // GameUI 생성 및 참조 저장
-        this.gameUI = new GameUI(this, numPlayers, piecesPerPlayer, boardType);
+        // FXGameUI 생성 시 Stage 전달
+        this.gameUI = new FXGameUI(this, numPlayers, piecesPerPlayer, boardType, stage);
 
         initializeGame();
     }
+
 
     private void initializeGame() {
         // 플레이어 초기화
@@ -64,12 +68,12 @@ public class Game {
         yutResult.clear(); // 이전 결과 초기화
 
         // 윷 던지기 다이얼로그 표시
-        int choice = gameUI.showYutThrowDialog();
+        boolean isRandom = gameUI.showYutThrowDialog();
 
         boolean extra = true;
         boolean backStart = false;
         while (extra && !backStart) {
-            YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
+            YutResult result = isRandom ? YutThrower.throwRandom() : YutThrower.throwManual();
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
             if(currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
@@ -110,6 +114,7 @@ public class Game {
             updateBoard();
         }
     }
+
 
     // 사용자가 보드에서 말을 선택했을 때 호출되는 메서드
     public void pieceSelected(int position) {
@@ -293,11 +298,11 @@ public class Game {
 
     // 말 잡았을 때 추가 윷 던지기
     private void throwYutForCatch() {
-        int choice = gameUI.showYutThrowDialog();
+        boolean isRandom = gameUI.showYutThrowDialog();
 
         boolean extra = true;
         while (extra) {
-            YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
+            YutResult result = isRandom ? YutThrower.throwRandom() : YutThrower.throwManual();
             yutResult.add(result.getValue());
 
             // 화면에 윷 결과 표시
@@ -419,7 +424,7 @@ public class Game {
     }
 
     // 게임 UI 반환
-    public GameUI getGameUI() {
+    public FXGameUI getGameUI() {
         return gameUI;
     }
 
