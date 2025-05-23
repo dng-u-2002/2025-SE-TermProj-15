@@ -102,8 +102,8 @@ public class FXBoardPanel {
         for (int i = 0; i < point * 100; i++) {
             if (locationX[i] != 0) {
                 if (possibleMoveLocations.contains(i)) {
-                    gc.setFill(Color.YELLOW);
-                    gc.fillOval(locationX[i] - 19, locationY[i] - 19, 38, 38);
+                    gc.setFill(Color.LIGHTCORAL);
+                    gc.fillOval(locationX[i] - 22, locationY[i] - 22, 44, 44);
                 }
                 if (i == selectedPosition) {
                     gc.setFill(Color.LIGHTBLUE);
