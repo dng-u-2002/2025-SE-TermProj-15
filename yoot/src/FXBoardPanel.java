@@ -131,7 +131,29 @@ public class FXBoardPanel {
                 }
             }
         }
+
+        // 시작 지점 말 시각화 추가
+        gc.setFill(Color.WHITE);
+        gc.fillRect(40, 40, 100, 40);
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(40, 40, 100, 40);
+        gc.setFont(Font.font("맑은 고딕", 12));
+        gc.strokeText("시작 지점", 50, 60);
+
+        if (gameController != null) {
+            Player currentPlayer = gameController.getCurrentPlayer();
+            if (currentPlayer != null && currentPlayer.pieceAtStart > 0) {
+                gc.setFill(playerColors[(currentPlayer.getId() - 1) % playerColors.length]);
+                gc.fillOval(110, 50, 15, 15);
+                gc.setFill(Color.WHITE);
+                gc.fillText(String.valueOf(currentPlayer.pieceAtStart), 114, 62);
+            }
+        }
     }
+
+    // 이하 drawPiecesAt, handleMouseClick, inStartArea, toDoubleArray, setPoints, setEdges 등 동일 유지
+
+
 
     private void drawPiecesAt(int position) {
         Map<Integer, Integer> playerPieces = pieces.get(position);

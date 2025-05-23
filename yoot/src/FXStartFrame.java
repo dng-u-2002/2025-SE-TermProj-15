@@ -96,8 +96,7 @@ public class FXStartFrame extends Application {
                 + "보드 종류: " + boardType);
         alert.showAndWait();
 
-        Game game = new Game(numPlayers, piecesPerPlayer, boardTypeInt, mainStage);
-
+        new Game(numPlayers, piecesPerPlayer, boardTypeInt, mainStage);
     }
 
     public static void main(String[] args) {

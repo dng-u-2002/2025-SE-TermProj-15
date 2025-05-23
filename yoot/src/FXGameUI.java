@@ -62,11 +62,17 @@ public class FXGameUI {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("윷 던지기");
         alert.setHeaderText("윷을 어떻게 던지시겠습니까?");
-        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+        // 사용자 정의 버튼
+        ButtonType randomType = new ButtonType("랜덤");
+        ButtonType manualType = new ButtonType("수동");
+
+        alert.getButtonTypes().setAll(randomType, manualType);
 
         Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.YES;
+        return result.isPresent() && result.get() == randomType;
     }
+
 
     public void showCatchMessage(int playerId) {
         showInfoDialog("말 잡기", "플레이어 " + playerId + "가 상대방 말을 잡았습니다! 추가 턴이 주어집니다.");

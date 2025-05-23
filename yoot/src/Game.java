@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Game {
     public int numPlayers, piecesPerPlayer, boardType;
+    public Stage stage;
     private List<Player> players;
     public List<Integer> yutResult = new ArrayList<>();
 
@@ -33,6 +34,7 @@ public class Game {
         this.numPlayers = numPlayers;
         this.piecesPerPlayer = piecesPerPlayer;
         this.boardType = boardType;
+        this.stage = stage;
 
         System.out.println("게임을 시작합니다. 플레이어 수: " + numPlayers + ", 말 개수: " + piecesPerPlayer + ", 판 형태: " + boardType);
 
@@ -57,6 +59,7 @@ public class Game {
         gameUI.setCurrentPlayer(getCurrentPlayer().getId());
 
         gameUI.updateGameStatus("플레이어 " + players.get(currentPlayerIndex).getId() + "의 차례입니다. 윷을 던지세요.");
+        updateBoard();
     }
 
     // 윷 던지기 버튼 클릭 시 호출되는 메서드
@@ -87,6 +90,11 @@ public class Game {
 
             // 화면에 윷 결과 표시
             gameUI.displayYutResult(result.getType().getDisplayName());
+
+            gameUI.updateGameStatus(
+                    "Player_" + currentPlayer.getId() + "이(가) 윷을 던졌습니다.\n" +
+                            "[" + result.getType().getDisplayName() + "]가 나왔습니다. 말을 선택해주세요.");
+
 
             extra = result.getType().hasExtraTurn();
             if (extra) {

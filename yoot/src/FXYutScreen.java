@@ -1,12 +1,12 @@
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class FXYutScreen {
@@ -22,31 +22,40 @@ public class FXYutScreen {
         this.gameController = gameController;
         this.stage = stage;
 
-        // 보드 생성
         board = new FXBoardPanel(boardType, playerCount, piecesPerPlayer);
 
-        // 상태 레이블
         statusLabel = new Label("게임을 시작합니다.");
         statusLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        statusLabel.setWrapText(true);
+        statusLabel.setMaxWidth(Double.MAX_VALUE);
 
-        // 윷 결과 레이블
         yutResultLabel = new Label("윷 결과: ");
         yutResultLabel.setStyle("-fx-font-size: 14px;");
+        yutResultLabel.setWrapText(true);
+        yutResultLabel.setMaxWidth(Double.MAX_VALUE);
 
-        // 윷 던지기 버튼
         throwButton = new Button("윷 던지기");
         throwButton.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        throwButton.setPrefSize(120, 50);
         throwButton.setOnAction(e -> gameController.throwYutButtonClicked());
 
-        // 정보 패널
-        GridPane infoPanel = new GridPane();
-        infoPanel.setVgap(10);
-        infoPanel.setPadding(new Insets(10));
-        infoPanel.add(statusLabel, 0, 0);
-        infoPanel.add(yutResultLabel, 0, 1);
-        infoPanel.add(throwButton, 0, 2);
+        VBox leftBox = new VBox(statusLabel);
+        leftBox.setAlignment(Pos.TOP_LEFT);
+        leftBox.setPadding(new Insets(10));
+        leftBox.setPrefWidth(600);
+        leftBox.setFillWidth(true);
 
-        // 게임 방법
+
+        VBox rightBox = new VBox(10, throwButton, yutResultLabel);
+        rightBox.setAlignment(Pos.TOP_RIGHT);
+        rightBox.setPrefWidth(150);
+        rightBox.setMaxHeight(Region.USE_PREF_SIZE);
+        rightBox.setPadding(new Insets(10));
+
+        HBox topPanel = new HBox(20, leftBox, rightBox);
+        topPanel.setAlignment(Pos.TOP_LEFT);
+        topPanel.setPadding(new Insets(10));
+
         TextArea instructionText = new TextArea();
         instructionText.setText(
                 "1. '윷 던지기' 버튼을 클릭하여 윷을 던집니다.\n" +
@@ -66,10 +75,9 @@ public class FXYutScreen {
         scrollPane.setFitToWidth(true);
         scrollPane.setPadding(new Insets(10));
 
-        // 전체 레이아웃
         root = new VBox(10);
         root.setPadding(new Insets(10));
-        root.getChildren().addAll(infoPanel, board.getPane(), scrollPane);
+        root.getChildren().addAll(topPanel, board.getPane(), scrollPane);
 
         Scene scene = new Scene(root, 800, 800);
         stage.setTitle("윷놀이 게임 - " + boardType + "각형 판");
