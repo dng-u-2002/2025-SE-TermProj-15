@@ -1,3 +1,5 @@
+package Model;
+
 public class YutResult {
     private YutResultType type;
        private int value;

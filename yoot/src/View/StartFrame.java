@@ -1,3 +1,7 @@
+package View;
+
+import Controller.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

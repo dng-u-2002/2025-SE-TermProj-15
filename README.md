@@ -1,7 +1,7 @@
 # Software Engineering - Spring 2025  
 ## 윷놀이 Project  
 
-This repository contains the **윷놀이 Game Project** for the Software Engineering course (Spring 2025). The project applies **Object-Oriented Analysis and Design (OOAD)** principles to develop a digital version of the traditional Korean board game *윷놀이*.  
+This repository contains the **윷놀이 Controller.Game Project** for the Software Engineering course (Spring 2025). The project applies **Object-Oriented Analysis and Design (OOAD)** principles to develop a digital version of the traditional Korean board game *윷놀이*.  
 
 ## 📌 Project Overview  
 - Develop a **윷놀이 game** using OOAD techniques.  

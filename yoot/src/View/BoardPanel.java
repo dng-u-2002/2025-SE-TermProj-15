@@ -1,3 +1,8 @@
+package View;
+
+import Controller.Game;
+import Model.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -151,7 +156,7 @@ public class BoardPanel extends JPanel {
 
     // 시작 지점에 있는 말 그리기
     private void drawStartPieces(Graphics2D g2D) {
-        // 시작 지점 위치 (BoardPanel 왼쪽 상단에 시각적으로 표시)
+        // 시작 지점 위치 (View.BoardPanel 왼쪽 상단에 시각적으로 표시)
         int startX = 50;
         int startY = 50;
 

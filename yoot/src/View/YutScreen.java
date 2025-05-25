@@ -1,3 +1,7 @@
+package View;
+
+import Controller.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +35,7 @@ public class YutScreen extends JFrame {
         this.setVisible(true);
     }
 
-    YutScreen(int playerCount, int piecesPerPlayer, int point, Game gameController) {
+    public YutScreen(int playerCount, int piecesPerPlayer, int point, Game gameController) {
         this.gameController = gameController;
 
         // 타이틀 설정

@@ -1,3 +1,12 @@
+package Controller;
+
+import Model.Player;
+import Model.RuleEngine;
+import Model.YutResult;
+import Model.YutThrower;
+import View.BoardPanel;
+import View.YutScreen;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -7,7 +16,7 @@ public class Game {
     private List<Player> players;
     public List<Integer> yutResult = new ArrayList<>();
 
-    // YutScreen과 BoardPanel 참조 추가
+    // YutScreen과 View.BoardPanel 참조 추가
     private YutScreen yutScreen;
     private BoardPanel boardPanel;
 
@@ -35,7 +44,7 @@ public class Game {
         this.boardType = boardType;
         System.out.println("게임을 시작합니다. 플레이어 수: " + numPlayers + ", 말 개수: " + piecesPerPlayer + ", 판 형태: " + boardType);
 
-        // YutScreen 생성 및 참조 저장
+        // View.YutScreen 생성 및 참조 저장
         this.yutScreen = new YutScreen(numPlayers, piecesPerPlayer, boardType, this);
         this.boardPanel = yutScreen.getBoard();
 

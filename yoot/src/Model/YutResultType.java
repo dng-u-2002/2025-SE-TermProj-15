@@ -1,3 +1,5 @@
+package Model;
+
 public enum YutResultType {
     BACK_DO(-1, "빽도", false),
     DO(1, "도", false),
