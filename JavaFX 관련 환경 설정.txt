@@ -4,13 +4,19 @@
 JavaFX SDK : 아래 링크에서 21.07 ver SDK를 다운로드, 압축 풀기
 https://gluonhq.com/products/javafx/
 
-SceneBuilder : 아래 링크에서 Scene Builder를 설치 후 .sdi 파일을 더블클릭해 설치.
-https://gluonhq.com/products/scene-builder/
 
-1. 아래 블로그를 따라 진행
-https://velog.io/@j_huuuuns/JavaFX-1.-JavaFX-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0
+1. 라이브러리 설정
+[File-Project Structure-Libraries]에서 +버튼을 눌러 압축을 해제한 JavaFX SDK의 lib폴더를 지정
 
-2.
+2. Main 클래스 지정
+[Run - Edit Configurations - Main class] 에서 Main 클래스를 지정
+
+3. VM option 추가
+[Modify options - Add VM options] 를 추가, 다음 명령어 입력
+--module-path "[JavaFX lib 위치]" --add-modules=javafx.fxml,javafx.controls
+
+
+(참고)
 File
 └── Project Structure (Ctrl+Alt+Shift+S)
      ├── Project
