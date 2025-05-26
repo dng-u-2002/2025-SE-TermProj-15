@@ -14,6 +14,7 @@ public class YutScreen extends JFrame {
     private JLabel yutResultLabel;
     private Game gameController;
     private JPanel infoPanel;
+    private ActionListener throwButtonListener;
 
     YutScreen() {
         board = new BoardPanel();
@@ -35,9 +36,7 @@ public class YutScreen extends JFrame {
         this.setVisible(true);
     }
 
-    public YutScreen(int playerCount, int piecesPerPlayer, int point, Game gameController) {
-        this.gameController = gameController;
-
+    public YutScreen(int playerCount, int piecesPerPlayer, int point) {
         // 타이틀 설정
         setTitle("윷놀이 게임 - " + point + "각형 판");
 
@@ -142,6 +141,11 @@ public class YutScreen extends JFrame {
         }
     }
 
+    public void setThrowButtonListener(ActionListener listener) {
+        this.throwButtonListener = listener;
+        throwButton.addActionListener(listener);
+    }
+    
     // 보드 패널 반환
     public BoardPanel getBoard() {
         return board;

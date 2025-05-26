@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Game;
+import Controller.GameController;
 import Model.Player;
 
 import javax.swing.*;
@@ -9,12 +9,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class BoardPanel extends JPanel {
 
     public int n = 500;
     public int center = n/2;
-    public int point = 4;
+
+    private int point = 4;
     public int radius = (n - 50) / 2;
     private final int[] arrX;
     private final int[] arrY;
@@ -29,7 +31,6 @@ public class BoardPanel extends JPanel {
     // 말 선택 관련 필드 추가
     private int selectedPosition = -1;  // 선택된 말의 위치
     private int currentPlayerId = 1;    // 현재 플레이어 ID
-    private Game gameController;        // 게임 컨트롤러 참조
 
     // 이동 가능한 위치 하이라이트
     private java.util.List<Integer> possibleMoveLocations = new java.util.ArrayList<>();
@@ -56,7 +57,7 @@ public class BoardPanel extends JPanel {
     }
 
     BoardPanel() {
-        this.arrX = new int[point];
+        this.a rrX = new int[point];
         this.arrY = new int[point];
         this.locationX = new int[point*100];
         this.locationY = new int[point*100];
@@ -76,9 +77,9 @@ public class BoardPanel extends JPanel {
     }
 
     // 게임 컨트롤러 설정
-    public void setGameController(Game gameController) {
-        this.gameController = gameController;
-    }
+    //public void setGameController(Game gameController) {
+    //    this.gameController = gameController;
+    //}
 
     // 현재 플레이어 설정
     public void setCurrentPlayer(int playerId) {
@@ -169,7 +170,7 @@ public class BoardPanel extends JPanel {
         g2D.drawString("시작 지점", startX, startY + 5);
 
         // 현재 플레이어의 시작 말만 클릭 가능하게 하이라이트
-        if (gameController != null) {
+        if (GameController.getInstance() != null) {
             Player currentPlayer = gameController.getCurrentPlayer();
             if (currentPlayer != null && currentPlayer.pieceAtStart > 0) {
                 g2D.setColor(playerColors[(currentPlayer.getId() - 1) % playerColors.length]);
@@ -229,54 +230,7 @@ public class BoardPanel extends JPanel {
 
     // 마우스 클릭 처리
     private void handleMouseClick(int mouseX, int mouseY) {
-        if (gameController == null) {
-            return;
-        }
 
-        Game.GameState currentState = gameController.getCurrentState();
-
-        // 시작 지점 말 선택 처리
-        if (currentState == Game.GameState.WAITING_FOR_PIECE_SELECTION) {
-            // 시작 지점 영역 체크 (왼쪽 상단의 직사각형 영역)
-            if (mouseX >= 40 && mouseX <= 150 && mouseY >= 40 && mouseY <= 90) {
-                Player currentPlayer = gameController.getCurrentPlayer();
-                if (currentPlayer != null && currentPlayer.pieceAtStart > 0) {
-                    // 시작 지점 말 선택
-                    gameController.pieceSelected(999); // 999는 시작 지점을 나타내는 특별한 값
-                    return;
-                }
-            }
-        }
-
-        // 보드 위의 말 선택 처리
-        int threshold = 17;
-        for (int i = 0; i < point*100; i++) {
-            if (locationX[i] != 0) {
-                int dx = locationX[i] - mouseX;
-                int dy = locationY[i] - mouseY;
-                double distance = Math.sqrt(dx*dx + dy*dy);
-
-                if (distance <= threshold) {
-                    // 게임 상태에 따라 다르게 처리
-                    if (currentState == Game.GameState.WAITING_FOR_PIECE_SELECTION) {
-                        // 말 선택 모드: 현재 플레이어의 말이 있는 위치만 선택 가능
-                        if (pieces.containsKey(i) && pieces.get(i).containsKey(currentPlayerId)) {
-                            selectedPosition = i;
-                            gameController.pieceSelected(i);
-                        }
-                    } else if (currentState == Game.GameState.WAITING_FOR_MOVE_SELECTION) {
-                        // 이동 위치 선택 모드: 가능한 이동 위치만 선택 가능
-                        if (possibleMoveLocations.contains(i)) {
-                            gameController.moveLocationSelected(i);
-                            clearPossibleMoves();
-                        }
-                    }
-
-                    repaint();
-                    break;
-                }
-            }
-        }
     }
 
     // 선택된 말 표시 및 가능한 이동 위치 하이라이트
@@ -358,5 +312,17 @@ public class BoardPanel extends JPanel {
                 locationY[50*point + 2] = (2*arrY[i] + center)/3;
             }
         }
+    }
+
+    public void setClickListener(Consumer<Point> Listener) {
+
+    }
+
+    public Point getPointofIndex(int i) {
+        return new Point(locationX[i], locationY[i]);
+    }
+
+    public int getPoint() {
+        return point;
     }
 }

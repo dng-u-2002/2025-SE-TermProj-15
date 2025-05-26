@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Game;
+import Controller.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -105,6 +106,7 @@ public class StartFrame extends JFrame {
                         "보드 종류: " + boardType,
                 "게임 시작", JOptionPane.INFORMATION_MESSAGE);
 
-        Game gameScreen = new Game(numPlayers, piecesPerPlayer, boardTypeInt);
+        //GameController에게 진행을 넘김
+        GameController.getInstance().setGame(numPlayers, piecesPerPlayer, boardTypeInt);
     }
 }

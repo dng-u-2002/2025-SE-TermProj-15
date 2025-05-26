@@ -7,12 +7,25 @@ import Model.YutThrower;
 import View.BoardPanel;
 import View.YutScreen;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
 public class Game {
-    public int numPlayers, piecesPerPlayer, boardType;
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public int getPiecesPerPlayer() {
+        return piecesPerPlayer;
+    }
+
+    public int getBoardType() {
+        return boardType;
+    }
+
+    private int numPlayers, piecesPerPlayer, boardType;
     private List<Player> players;
     public List<Integer> yutResult = new ArrayList<>();
 
@@ -42,31 +55,24 @@ public class Game {
         this.numPlayers = numPlayers;
         this.piecesPerPlayer = piecesPerPlayer;
         this.boardType = boardType;
+
+        //////////////////////나중에 지울 것///////////////////////////////
         System.out.println("게임을 시작합니다. 플레이어 수: " + numPlayers + ", 말 개수: " + piecesPerPlayer + ", 판 형태: " + boardType);
-
-        // View.YutScreen 생성 및 참조 저장
-        this.yutScreen = new YutScreen(numPlayers, piecesPerPlayer, boardType, this);
-        this.boardPanel = yutScreen.getBoard();
-
-        // BoardPanel에 게임 컨트롤러 참조 설정
-        boardPanel.setGameController(this);
 
         initializeGame();
     }
 
     private void initializeGame() {
         // 플레이어 초기화
-        for(int i = 0; i < numPlayers; i++) {
-            Player player = new Player(i+1, piecesPerPlayer, boardType);
+        for (int i = 0; i < numPlayers; i++) {
+            Player player = new Player(i + 1, piecesPerPlayer, boardType);
             players.add(player);
         }
-
         // 첫 번째 플레이어부터 시작
         currentPlayerIndex = 0;
-
         // 현재 플레이어 정보 BoardPanel에 설정
+        // Controller에게로
         boardPanel.setCurrentPlayer(getCurrentPlayer().getId());
-
         updateGameStatus("플레이어 " + players.get(currentPlayerIndex).getId() + "의 차례입니다. 윷을 던지세요.");
     }
 
@@ -95,7 +101,7 @@ public class Game {
                 options,
                 options[0]
         );
-        
+
 
         boolean extra = true;
         boolean backStart = false;
@@ -103,23 +109,23 @@ public class Game {
             YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
-            if(currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
-            	yutScreen.displayYutResult(result.getType().getDisplayName());
-            	yutResult.clear();
-            	JOptionPane.showMessageDialog(
-            			yutScreen,
-            			result.getType().getDisplayName() + "(가) 나와 건너뜁니다!",
-            			"상대방 턴",
+            if (currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
+                yutScreen.displayYutResult(result.getType().getDisplayName());
+                yutResult.clear();
+                JOptionPane.showMessageDialog(
+                        yutScreen,
+                        result.getType().getDisplayName() + "(가) 나와 건너뜁니다!",
+                        "상대방 턴",
                         JOptionPane.INFORMATION_MESSAGE
                 );
-            	nextPlayerTurn();
-            	updateBoard();
-            	backStart = true;
+                nextPlayerTurn();
+                updateBoard();
+                backStart = true;
             }
 
             // 화면에 윷 결과 표시
             yutScreen.displayYutResult(result.getType().getDisplayName());
-            
+
             extra = result.getType().hasExtraTurn();
             if (extra) {
                 // 추가 턴이 있는 경우 메시지 표시
@@ -131,9 +137,9 @@ public class Game {
                 );
             }
         }
-        
-        if(!backStart) {
-        	// 윷 결과 목록 표시
+
+        if (!backStart) {
+            // 윷 결과 목록 표시
             StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
             for (int i = 0; i < yutResult.size(); i++) {
                 resultMsg.append((i + 1)).append(". ").append(yutResult.get(i)).append("\n");
@@ -150,7 +156,7 @@ public class Game {
             // 보드 업데이트
             updateBoard();
         }
-        
+
     }
 
     // 사용자가 보드에서 말을 선택했을 때 호출되는 메서드
@@ -250,7 +256,7 @@ public class Game {
         updateGameStatus("플레이어 " + currentPlayer.getId() + "의 말이 위치 " + position + "로 이동했습니다.");
         boardPanel.clearPossibleMoves();
         updateBoard();
-       
+
 
         // 현재 플레이어가 승리했는지 확인
         if (currentPlayer.hasWon()) {
@@ -258,17 +264,17 @@ public class Game {
             handleVictory(currentPlayer);
             return;
         }
-        
-        if(currentPlayer.allStart() && yutResult.get(0) == -1 && yutResult.size() == 1) {
-        	yutResult.clear();
-        	JOptionPane.showMessageDialog(
-        			yutScreen,
-        			"빽도(가) 남아 건너뜁니다!",
-        			"상대방 턴",
+
+        if (currentPlayer.allStart() && yutResult.get(0) == -1 && yutResult.size() == 1) {
+            yutResult.clear();
+            JOptionPane.showMessageDialog(
+                    yutScreen,
+                    "빽도(가) 남아 건너뜁니다!",
+                    "상대방 턴",
                     JOptionPane.INFORMATION_MESSAGE
             );
-        	nextPlayerTurn();
-        	updateBoard();
+            nextPlayerTurn();
+            updateBoard();
         }
 
         // 잡기로 인한 추가 턴이 없으면 남은 윷 결과 처리 또는 다음 플레이어 턴
@@ -402,8 +408,8 @@ public class Game {
         if (yutResult.isEmpty()) {
             // 모든 윷 결과 사용 완료, 다음 플레이어 턴
             nextPlayerTurn();
-        } else if(yutResult.size() == 1 && yutResult.get(0) == -1) {
-        	nextPlayerTurn();
+        } else if (yutResult.size() == 1 && yutResult.get(0) == -1) {
+            nextPlayerTurn();
         } else {
             // 남은 윷 결과가 있음, 말 선택 계속
             currentState = GameState.WAITING_FOR_PIECE_SELECTION;
@@ -464,7 +470,7 @@ public class Game {
         boardPanel.clearPieces(); // 기존 말 지우기
 
         for (Player player : players) {
-            for (int i = 0; i < boardType*100; i++) {
+            for (int i = 0; i < boardType * 100; i++) {
                 if (player.pieceIndex[i] > 0) {
                     // 플레이어 ID와 말 개수 정보로 보드 업데이트
                     boardPanel.addPiece(i, player.getId(), player.pieceIndex[i]);
@@ -481,7 +487,7 @@ public class Game {
         // 플레이어 초기화
         players.clear();
         for (int i = 0; i < numPlayers; i++) {
-            Player player = new Player(i+1, piecesPerPlayer, boardType);
+            Player player = new Player(i + 1, piecesPerPlayer, boardType);
             players.add(player);
         }
 

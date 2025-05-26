@@ -1,5 +1,4 @@
 package Controller;
-
 import View.StartFrame;
 
 public class Main {
