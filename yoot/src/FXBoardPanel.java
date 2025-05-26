@@ -1,5 +1,3 @@
-// FXML이 아닌 순수 JavaFX Canvas + 이벤트 처리 기반의 BoardPanel 대체 구현입니다.
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
@@ -150,10 +148,6 @@ public class FXBoardPanel {
             }
         }
     }
-
-    // 이하 drawPiecesAt, handleMouseClick, inStartArea, toDoubleArray, setPoints, setEdges 등 동일 유지
-
-
 
     private void drawPiecesAt(int position) {
         Map<Integer, Integer> playerPieces = pieces.get(position);

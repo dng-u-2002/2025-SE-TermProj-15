@@ -62,7 +62,7 @@ public class Game {
         updateBoard();
     }
 
-    // 윷 던지기 버튼 클릭 시 호출되는 메서드
+    // 윷 던지기 버튼 클릭 시 호출되는 메소드
     public void throwYutButtonClicked() {
         if (currentState != GameState.WAITING_FOR_YUT) {
             return; // 현재 상태가 윷 던지기 대기 상태가 아니면 무시
@@ -70,40 +70,49 @@ public class Game {
 
         yutResult.clear(); // 이전 결과 초기화
 
-        // 윷 던지기 다이얼로그 표시
-        boolean isRandom = gameUI.showYutThrowDialog();
-
-        boolean extra = true;
+        List<YutResult> allResults = new ArrayList<>(); // 모든 윷 결과 저장
         boolean backStart = false;
-        while (extra && !backStart) {
-            YutResult result = isRandom ? YutThrower.throwRandom() : YutThrower.throwManual();
+        
+        // 첫 번째 윷 던지기
+        YutThrowResult throwResult = gameUI.throwYutWithDialog(true);
+        YutResult result = throwResult.getResult();
+        allResults.add(result);
+        yutResult.add(result.getValue());
+        
+        // 빽도가 나왔고 모든 말이 시작점에 있는 경우 처리
+        Player currentPlayer = getCurrentPlayer();
+        if (currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
+            gameUI.displayYutResult(result.getType().getDisplayName());
+            yutResult.clear();
+            gameUI.showBackDoSkipMessage();
+            nextPlayerTurn();
+            updateBoard();
+            backStart = true;
+        }
+
+        // 추가 턴이 있는 경우 반복
+        while (!backStart && throwResult.hasExtraTurn()) {
+            // 추가 윷 던지기 (UI 사용)
+            throwResult = gameUI.throwYutWithDialog(false);
+            result = throwResult.getResult();
+            allResults.add(result);
             yutResult.add(result.getValue());
-            Player currentPlayer = getCurrentPlayer();
-            if(currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
-                gameUI.displayYutResult(result.getType().getDisplayName());
-                yutResult.clear();
+        
+            // 화면에 윷 결과 표시
+            gameUI.displayYutResult(result.getType().getDisplayName());
+        
+            // 빽도 처리
+            if (currentPlayer.allStart() && result.getValue() == -1) {
                 gameUI.showBackDoSkipMessage();
+                yutResult.clear();
                 nextPlayerTurn();
                 updateBoard();
                 backStart = true;
-            }
-
-            // 화면에 윷 결과 표시
-            gameUI.displayYutResult(result.getType().getDisplayName());
-
-            gameUI.updateGameStatus(
-                    "Player_" + currentPlayer.getId() + "이(가) 윷을 던졌습니다.\n" +
-                            "[" + result.getType().getDisplayName() + "]가 나왔습니다. 말을 선택해주세요.");
-
-
-            extra = result.getType().hasExtraTurn();
-            if (extra) {
-                // 추가 턴이 있는 경우 메시지 표시
-                gameUI.showExtraTurnMessage(result.getType().getDisplayName());
+                break;
             }
         }
 
-        if(!backStart) {
+        if (!backStart) {
             // 윷 결과 목록 표시
             StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
             for (int i = 0; i < yutResult.size(); i++) {
@@ -116,7 +125,7 @@ public class Game {
 
             // 현재 플레이어의 말 상태 표시
             gameUI.updateGameStatus(resultMsg + "\n플레이어 " + getCurrentPlayer().getId() +
-                    "의 차례입니다. 이동할 말을 선택하세요.");
+                "의 차례입니다. 이동할 말을 선택하세요.");
 
             // 보드 업데이트
             updateBoard();
@@ -306,22 +315,28 @@ public class Game {
 
     // 말 잡았을 때 추가 윷 던지기
     private void throwYutForCatch() {
-        boolean isRandom = gameUI.showYutThrowDialog();
-
-        boolean extra = true;
-        while (extra) {
-            YutResult result = isRandom ? YutThrower.throwRandom() : YutThrower.throwManual();
+        List<YutResult> allResults = new ArrayList<>();
+        
+        // 첫 번째 윷 던지기
+        YutThrowResult throwResult = gameUI.throwYutWithDialog(true);
+        YutResult result = throwResult.getResult();
+        allResults.add(result);
+        yutResult.add(result.getValue());
+        
+        // 화면에 윷 결과 표시
+        gameUI.displayYutResult(result.getType().getDisplayName());
+        
+        // 추가 턴이 있는 경우 반복
+        while (throwResult.hasExtraTurn()) {
+            throwResult = gameUI.throwYutWithDialog(false);
+            result = throwResult.getResult();
+            allResults.add(result);
             yutResult.add(result.getValue());
-
+            
             // 화면에 윷 결과 표시
             gameUI.displayYutResult(result.getType().getDisplayName());
-
-            extra = result.getType().hasExtraTurn();
-            if (extra) {
-                gameUI.showExtraTurnMessage(result.getType().getDisplayName());
-            }
         }
-
+        
         // 윷 결과 표시 및 다음 상태로 이동
         StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
         for (int i = 0; i < yutResult.size(); i++) {
@@ -357,7 +372,7 @@ public class Game {
     private void handleVictory(Player player) {
         // 게임 종료
         currentState = GameState.GAME_OVER;
-        gameUI.updateGameStatus("🎉 게임 종료! 승자: 플레이어 " + player.getId());
+        gameUI.updateGameStatus("게임 종료! 승자: 플레이어 " + player.getId());
 
         // 게임 종료 메시지 표시
         gameUI.showVictoryMessage(player.getId());

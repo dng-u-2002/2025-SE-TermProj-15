@@ -59,30 +59,59 @@ public class FXGameUI {
         }
     }
 
-    public boolean showYutThrowDialog() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("윷 던지기");
-        alert.setHeaderText("윷을 어떻게 던지시겠습니까?");
+    // 윷 결과를 반환하고 추가 턴이 필요한지 여부를 알려주는 메소드
+    public YutThrowResult throwYutWithDialog(boolean isFirstThrow) {
+        // 윷 던지기 방식 선택 (첫 번째 던지기일 때만)
+        boolean isRandom;
+        if (isFirstThrow) {
+            Alert choiceAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            choiceAlert.setTitle("윷 던지기");
+            choiceAlert.setHeaderText("윷을 어떻게 던지시겠습니까?");
 
-        // 사용자 정의 버튼
-        ButtonType randomType = new ButtonType("랜덤");
-        ButtonType manualType = new ButtonType("수동");
+            ButtonType randomType = new ButtonType("랜덤");
+            ButtonType manualType = new ButtonType("수동");
 
-        alert.getButtonTypes().setAll(randomType, manualType);
+            choiceAlert.getButtonTypes().setAll(randomType, manualType);
 
-        Optional<ButtonType> result = alert.showAndWait();
-        
-        // 사용자가 수동 선택을 했을 경우 수동 윷 선택 대화상자 표시
-        if (result.isPresent() && result.get() == manualType) {
-            showManualYutSelectionDialog();
+            Optional<ButtonType> choiceResult = choiceAlert.showAndWait();
+            isRandom = choiceResult.isPresent() && choiceResult.get() == randomType;
+        } else {
+            // 추가 턴일 경우 이전과 동일한 방식으로 던지기
+            isRandom = lastThrowWasRandom;
         }
         
-        // 랜덤 선택 여부 반환 (true: 랜덤, false: 수동)
-        return result.isPresent() && result.get() == randomType;
+        // 마지막 던지기 방식 저장
+        lastThrowWasRandom = isRandom;
+
+        // 윷 결과 가져오기
+        YutResult result;
+        if (isRandom) {
+            result = YutThrower.throwRandom();
+        } else {
+            // 수동 선택 대화상자 표시
+            result = showManualYutSelectionDialog();
+        }
+
+        // 결과가 null이면 (취소 시) 임시로 DO 반환
+        if (result == null) {
+            result = new YutResult(YutResultType.DO);
+        }
+
+        // 결과 표시
+        displayYutResult(result.getType().getDisplayName());
+
+        // 추가 턴이 있는 경우
+        boolean hasExtraTurn = result.getType().hasExtraTurn();
+        if (hasExtraTurn) {
+            showExtraTurnMessage(result.getType().getDisplayName());
+        }
+
+        // 결과와 추가 턴 여부 반환
+        return new YutThrowResult(result, hasExtraTurn);
     }
 
-    // 수동 윷 선택 대화상자 (별도의 메소드로 분리)
-    private void showManualYutSelectionDialog() {
+    // 수동 윷 선택 대화창 (YutResult 반환)
+    private YutResult showManualYutSelectionDialog() {
         Alert manualAlert = new Alert(Alert.AlertType.CONFIRMATION);
         manualAlert.setTitle("윷 수동 선택");
         manualAlert.setHeaderText("원하는 윷 결과를 선택하세요");
@@ -96,40 +125,54 @@ public class FXGameUI {
         ButtonType moType = new ButtonType("모");
         ButtonType cancelType = new ButtonType("취소", ButtonBar.ButtonData.CANCEL_CLOSE);
         
-        // 대화상자에 버튼 추가
+        // 대화창에 버튼 추가
         manualAlert.getButtonTypes().setAll(
             backDoType, doType, gaeType, gulType, yutType, moType, cancelType
         );
         
-        // 대화상자 표시 및 결과 처리
+        // 대화창 표시 및 결과 처리
         Optional<ButtonType> result = manualAlert.showAndWait();
         
-        // YutThrower.throwManual() 메소드 수정
         if (result.isPresent()) {
             ButtonType selectedButton = result.get();
-            YutResultType selectedType = null;
             
             if (selectedButton == backDoType) {
-                selectedType = YutResultType.BACK_DO;
+                return new YutResult(YutResultType.BACK_DO);
             } else if (selectedButton == doType) {
-                selectedType = YutResultType.DO;
+                return new YutResult(YutResultType.DO);
             } else if (selectedButton == gaeType) {
-                selectedType = YutResultType.GAE;
+                return new YutResult(YutResultType.GAE);
             } else if (selectedButton == gulType) {
-                selectedType = YutResultType.GEOL;
+                return new YutResult(YutResultType.GEOL);
             } else if (selectedButton == yutType) {
-                selectedType = YutResultType.YUT;
+                return new YutResult(YutResultType.YUT);
             } else if (selectedButton == moType) {
-                selectedType = YutResultType.MO;
-            }
-            
-            // selectedType이 null이 아니면 YutThrower 클래스의 정적 변수에 저장
-            if (selectedType != null) {
-                YutThrower.selectedManualResult = selectedType;
+                return new YutResult(YutResultType.MO);
             }
         }
+        
+        // 취소 또는 창 닫힘 (default : DO)
+        return new YutResult(YutResultType.DO);
     }
 
+    // 기존 showYutThrowDialog 함수
+    public boolean showYutThrowDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("윷 던지기");
+        alert.setHeaderText("윷을 어떻게 던지시겠습니까?");
+
+        ButtonType randomType = new ButtonType("랜덤");
+        ButtonType manualType = new ButtonType("수동");
+
+        alert.getButtonTypes().setAll(randomType, manualType);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        lastThrowWasRandom = result.isPresent() && result.get() == randomType;
+        return lastThrowWasRandom;
+    }
+
+    // 변수 추가: 마지막 윷 던지기 방식
+    private boolean lastThrowWasRandom = true;
 
     public void showCatchMessage(int playerId) {
         showInfoDialog("말 잡기", "플레이어 " + playerId + "가 상대방 말을 잡았습니다! 추가 턴이 주어집니다.");
