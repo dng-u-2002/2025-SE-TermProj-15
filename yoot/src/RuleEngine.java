@@ -88,7 +88,16 @@ public class RuleEngine {
                             case 4 -> possibleLocation.add(202);
                             case 5 -> possibleLocation.add(0);
                         }
-                    }else if(index == 52){
+                    } else if(index == 102){
+                        switch(yut){
+                            case -1 -> possibleLocation.add(index + yut);
+                            case 1 -> possibleLocation.add(boardType*50);
+                            case 2 -> possibleLocation.add(201);
+                            case 3 -> possibleLocation.add(202);
+                            case 4 -> possibleLocation.add(0);
+                            case 5 -> isFinish = true;
+                        }
+                    } else if(index == 52){
                         switch(yut){
                             case -1 -> possibleLocation.add(index + yut);
                             case 1 -> possibleLocation.add(boardType*50);
@@ -283,6 +292,8 @@ public class RuleEngine {
                     switch(yut){
                         case 2, 3, 4, 5 -> result = true;
                     }
+                } else if(index == 102 && yut == 5){
+                    result = true;
                 }
             } else if(boardType == 5){              //오각형
                 if (index == 152){
