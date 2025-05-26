@@ -67,7 +67,20 @@ public class YutThrower {
         return new YutResult(type);
     }
 
+    // 수동 선택 결과를 저장하는 정적 변수 추가
+    public static YutResultType selectedManualResult = null;
+
+    // throwManual 메소드 수정
     public static YutResult throwManual() {
+        // FXGameUI에서 선택한 결과가 있는 경우
+        if (selectedManualResult != null) {
+            YutResultType type = selectedManualResult;
+            selectedManualResult = null; // 사용 후 초기화
+            System.out.println("수동 선택 결과: [" + type.getDisplayName() + "]");
+            return new YutResult(type);
+        }
+        
+        // 기존 터미널 입력 방식 (백업용)
         Scanner scanner = new Scanner(System.in);
         System.out.println("윷 결과를 수동으로 선택하세요:");
         for (int i = 0; i < YutResultType.values().length; i++) {
@@ -76,7 +89,7 @@ public class YutThrower {
 
         int choice;
         while (true) {
-            System.out.print("번호 입력 (1 ~ 6): ");
+            System.out.print("번호 입력 (0 ~ 5): ");
             choice = scanner.nextInt();
             if (choice >= 0 && choice <= 5) break;
             System.out.println("잘못된 선택입니다.");
