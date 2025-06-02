@@ -21,8 +21,11 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
   - **Winning condition**: The first player to move all pieces to the goal wins
 - Players can **restart** or **exit** after a game finishes
 
+## JavaFX
+- This branch is for projects implemented in JavaFX. For installation and environment setting for JavaFX, please check **JavaFX 관련 환경설정.txt** file.
+
 ### 🧭 Pentagon and Hexagon Movement Examples
-오각형과 육각형에서의 경로 선택 예시는 다음과 같습니다:
+Example of path selection in Hexagon and Pentagon board is as following:
 
 #### ▶ Pentagon Board Path Example
 ![Pentagon Path](Pentagon_logic.jpg)
@@ -74,6 +77,10 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 ## 📂 Repository Structure
 ```
 📁 .idea/
+ ┣ 📁 libraries/
+ ┃ ┣ 📄 junit_jupiter.xml
+ ┃ ┗ 📄 lib.xml
+ ┃
  ┣ 📄 .gitignore
  ┣ 📄 material_theme_project_new.xml
  ┣ 📄 misc.xml
@@ -82,35 +89,39 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 
 📁 yoot/
  ┣ 📁 .idea/
-   ┣ 📄 .gitignore
-   ┣ 📄 .name
-   ┣ 📄 misc.xml
-   ┣ 📄 modules.xml
-   ┣ 📄 uiDesigner.xml
-   ┗ 📄 vcs.xml
-
+ ┃ ┣ 📄 .gitignore
+ ┃ ┣ 📄 .name
+ ┃ ┣ 📄 misc.xml
+ ┃ ┣ 📄 modules.xml
+ ┃ ┣ 📄 uiDesigner.xml
+ ┃ ┗ 📄 vcs.xml
+ ┃
  ┣ 📁 src/
-    ┣ 📁 yutnori_ver2/
-      ┣ 📄 BoardPanel.java
-      ┣ 📄 Game.java
-      ┣ 📄 Main.java
-      ┣ 📄 Player.java
-      ┣ 📄 RuleEngine.java
-      ┣ 📄 StartFrame.java
-      ┣ 📄 Yut.java
-      ┣ 📄 YutResult.java
-      ┣ 📄 YutResultType.java
-      ┣ 📄 YutScreen.java
-      ┗ 📄 YutThrower.java
-    ┗ 📄 YutNori.exe
+ ┃ ┣ 📄 FXBoardPanel.java
+ ┃ ┣ 📄 FXGameUI.java
+ ┃ ┣ 📄 FXStartFrame.java
+ ┃ ┣ 📄 FXYutScreen.java
+ ┃ ┣ 📄 Game.java
+ ┃ ┣ 📄 Main.java
+ ┃ ┣ 📄 Player.java
+ ┃ ┣ 📄 RuleEngine.java
+ ┃ ┣ 📄 YutNori.exe
+ ┃ ┣ 📄 YutResult.java
+ ┃ ┣ 📄 YutResultType.java
+ ┃ ┣ 📄 YutThrowResult.java
+ ┃ ┗ 📄 YutThrower.java
+ ┃
  ┣ 📄 .gitignore
  ┗ 📄 yoot.iml
+
 📄 .classpath
 📄 .project
 📄 2025-SE-TermProj-15.iml
 📄 Hexagon_logic.jpg
+📄 JavaFX 관련 환경 설정.txt
 📄 Pentagon_logic.jpg
 📄 README.md
+
 ```
 
 ## 역할 분담
