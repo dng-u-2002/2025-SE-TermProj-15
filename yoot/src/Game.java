@@ -52,7 +52,7 @@ public class Game {
         // 현재 플레이어 정보 BoardPanel에 설정
         gameUI.setCurrentPlayer(getCurrentPlayer().getId());
 
-        gameUI.updateGameStatus("플레이어 " + players.get(currentPlayerIndex).getId() + "의 차례입니다. 윷을 던지세요.");
+        gameUI.updateGameStatus("플레이어 " + players.get(currentPlayerIndex).getId() + "의 차례입니다.\n 윷을 던지세요.");
     }
 
     // 윷 던지기 버튼 클릭 시 호출되는 메서드
@@ -102,7 +102,9 @@ public class Game {
             // 윷 결과 목록 표시
             StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
             for (int i = 0; i < yutResult.size(); i++) {
-                resultMsg.append((i + 1)).append(". ").append(yutResult.get(i)).append("\n");
+                YutResult result = YutThrower.throwManual(yutResult.get(i));
+                YutResultType type = result.getType();
+                resultMsg.append((i + 1)).append(". ").append(type.getDisplayName()).append("  /  ");
             }
             gameUI.updateGameStatus(resultMsg.toString());
 
@@ -326,7 +328,9 @@ public class Game {
         // 윷 결과 표시 및 다음 상태로 이동
         StringBuilder resultMsg = new StringBuilder("이번 턴의 윷 결과 목록:\n");
         for (int i = 0; i < yutResult.size(); i++) {
-            resultMsg.append((i + 1)).append(". ").append(yutResult.get(i)).append("\n");
+            YutResult result = YutThrower.throwManual(yutResult.get(i));
+            YutResultType type = result.getType();
+            resultMsg.append((i + 1)).append(". ").append(type.getDisplayName()).append("  /  ");
         }
         gameUI.updateGameStatus(resultMsg.toString());
 
