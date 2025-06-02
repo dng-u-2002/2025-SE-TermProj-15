@@ -21,8 +21,9 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
   - **Winning condition**: The first player to move all pieces to the goal wins
 - Players can **restart** or **exit** after a game finishes
 
-## JavaFX
+## JavaFX & How to Execute
 - This branch is for projects implemented in JavaFX. For installation and environment setting for JavaFX, please check **JavaFX 관련 환경설정.txt** file.
+- Run **Yutnori_JavaFX > Yutnori_JavaFX.exe**. Then you can see GUI of JavaFX.
 
 ### 🧭 Pentagon and Hexagon Movement Examples
 Example of path selection in Hexagon and Pentagon board is as following:
@@ -113,6 +114,22 @@ Example of path selection in Hexagon and Pentagon board is as following:
  ┃
  ┣ 📄 .gitignore
  ┗ 📄 yoot.iml
+ 
+📁 Yutnori_JavaFX/
+ ┣ 📁 app/
+ ┃ ┣ 📄 .jpackage.xml
+ ┃ ┣ 📄 2025-SE-TermProj-15.jar
+ ┃ ┗ 📄 Yutnori_JavaFX.cfg
+ ┃
+ ┣ 📁 runtime/
+ ┃ ┣ 📁 bin/
+ ┃ ┣ 📁 conf/
+ ┃ ┣ 📁 include/
+ ┃ ┣ 📁 legal/
+ ┃ ┣ 📁 lib/
+ ┃ ┗ 📄 release
+ ┃
+ ┗ 📄 Yutnori_JavaFX.exe
 
 📄 .classpath
 📄 .project
