@@ -1,8 +1,9 @@
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ButtonBar;
 import java.util.List;
 import java.util.Optional;
-import javafx.scene.control.ButtonBar;
 
 public class FXGameUI {
     private Game gameController;
@@ -186,9 +187,19 @@ public class FXGameUI {
         showInfoDialog("상대방 턴", "빽도(가) 나와 건너뜁니다!");
     }
 
+    // JavaFX ChoiceDialog 사용 > 골인한 윷 결과 선택 가능
     public String showFinishSelectDialog(List<String> options) {
-        if (options.isEmpty()) return null;
-        return options.get(0); // 기본적으로 첫 번째 옵션 선택
+        if (options == null || options.isEmpty()) {
+            return null;
+        }
+
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(options.get(0), options);
+        dialog.setTitle("골인 선택");
+        dialog.setHeaderText("어떤 윷 결과로 골인하시겠습니까?");
+        dialog.setContentText("선택:");
+
+        Optional<String> result = dialog.showAndWait();
+        return result.orElse(null);
     }
 
     public void showVictoryMessage(int playerId) {
