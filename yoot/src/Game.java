@@ -69,7 +69,14 @@ public class Game {
         boolean extra = true;
         boolean backStart = false;
         while (extra && !backStart) {
-            YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
+            YutResult result;
+            if(choice == 1){
+                int manual;
+                manual = gameUI.showManualYutDialog();
+                result = YutThrower.throwManual(manual);
+            } else{
+                result = YutThrower.throwRandom();
+            }
             yutResult.add(result.getValue());
             Player currentPlayer = getCurrentPlayer();
             if(currentPlayer.allStart() && result.getValue() == -1 && yutResult.size() == 1) {
@@ -297,7 +304,14 @@ public class Game {
 
         boolean extra = true;
         while (extra) {
-            YutResult result = (choice == 1) ? YutThrower.throwManual() : YutThrower.throwRandom();
+            YutResult result;
+            if(choice == 1){
+                int manual;
+                manual = gameUI.showManualYutDialog();
+                result = YutThrower.throwManual(manual);
+            } else{
+                result = YutThrower.throwRandom();
+            }
             yutResult.add(result.getValue());
 
             // 화면에 윷 결과 표시

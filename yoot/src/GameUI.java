@@ -99,6 +99,26 @@ public class GameUI {
         );
     }
 
+    public int showManualYutDialog(){
+        Object[] options = {"빽도", "도", "개", "걸", "윷", "모"};
+        int choice = JOptionPane.showOptionDialog(
+                yutScreen,
+                "윷을 어떻게 던지시겠습니까?",
+                "윷 던지기",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        int[] yutValues = {-1, 1, 2, 3, 4, 5};
+        if(choice >= 0 && choice < yutValues.length){
+            return yutValues[choice];
+        } else{
+            return 0;
+        }
+    }
+
     // 말 잡기 알림 표시
     public void showCatchMessage(int playerId) {
         JOptionPane.showMessageDialog(

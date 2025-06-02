@@ -104,8 +104,8 @@ public class BoardPanel extends JPanel {
                 // 이동 가능한 위치 하이라이트
                 if (possibleMoveLocations.contains(i)) {
                     // 이동 가능한 위치는 밝은 노란색으로 표시
-                    g2D.setPaint(new Color(255, 255, 150));
-                    g2D.fillOval(locationX[i] - 19, locationY[i] - 19, 38, 38);
+                    g2D.setPaint(new Color(50, 205, 50));
+                    g2D.fillOval(locationX[i] - 20, locationY[i] - 20, 40, 40);
                 }
 
                 // 선택된 위치 하이라이트
@@ -152,8 +152,8 @@ public class BoardPanel extends JPanel {
     // 시작 지점에 있는 말 그리기
     private void drawStartPieces(Graphics2D g2D) {
         // 시작 지점 위치 (BoardPanel 왼쪽 상단에 시각적으로 표시)
-        int startX = 50;
-        int startY = 50;
+        int startX = 450;
+        int startY = 400;
 
         g2D.setColor(Color.WHITE);
         g2D.fillRect(startX - 10, startY - 10, 100, 40);
@@ -233,7 +233,7 @@ public class BoardPanel extends JPanel {
         // 시작 지점 말 선택 처리
         if (currentState == Game.GameState.WAITING_FOR_PIECE_SELECTION) {
             // 시작 지점 영역 체크 (왼쪽 상단의 직사각형 영역)
-            if (mouseX >= 40 && mouseX <= 150 && mouseY >= 40 && mouseY <= 90) {
+            if (mouseX >= 450 && mouseX <= 560 && mouseY >= 400 && mouseY <= 450) {
                 Player currentPlayer = gameController.getCurrentPlayer();
                 if (currentPlayer != null && currentPlayer.pieceAtStart > 0) {
                     // 시작 지점 말 선택

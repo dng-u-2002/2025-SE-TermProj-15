@@ -67,7 +67,8 @@ public class YutThrower {
         return new YutResult(type);
     }
 
-    public static YutResult throwManual() {
+    public static YutResult throwManual(int manual) {
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("윷 결과를 수동으로 선택하세요:");
         for (int i = 0; i < YutResultType.values().length; i++) {
@@ -81,9 +82,10 @@ public class YutThrower {
             if (choice >= 0 && choice <= 5) break;
             System.out.println("잘못된 선택입니다.");
         }
-
-        YutResultType chosen = YutResultType.values()[choice];
+        */
+        YutResultType chosen = YutResultType.values()[manual];
         System.out.println("수동 선택 결과: [" + chosen.getDisplayName() + "]");
         return new YutResult(chosen);
+
     }
 }
