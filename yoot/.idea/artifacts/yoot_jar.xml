@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="yoot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/yoot_jar</output-path>
+    <root id="archive" name="yoot.jar">
+      <element id="module-output" name="yoot" />
+    </root>
+  </artifact>
+</component>
