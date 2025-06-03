@@ -81,6 +81,9 @@ Example of path selection in Hexagon and Pentagon board is as following:
 ## 📂 Repository Structure
 ```
 📁 .idea/
+ ┣ 📁 artifacts/
+ ┃ ┗ 📄 2025_SE_TermProj_15_jar.xml
+ ┃
  ┣ 📁 libraries/
  ┃ ┣ 📄 junit_jupiter.xml
  ┃ ┗ 📄 lib.xml
