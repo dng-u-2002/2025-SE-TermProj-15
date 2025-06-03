@@ -16,6 +16,16 @@ class YutResultTest {
     public void testTypeIsStoredCorrectly() {
         YutResult result = new YutResult(YutResultType.DO);
         assertEquals(YutResultType.DO, result.getType());
+        result = new YutResult(YutResultType.GAE);
+        assertEquals(YutResultType.GAE, result.getType());
+        result = new YutResult(YutResultType.GEOL);
+        assertEquals(YutResultType.GEOL, result.getType());
+        result = new YutResult(YutResultType.YUT);
+        assertEquals(YutResultType.YUT, result.getType());
+        result = new YutResult(YutResultType.MO);
+        assertEquals(YutResultType.MO, result.getType());
+        result = new YutResult(YutResultType.BACK_DO);
+        assertEquals(YutResultType.BACK_DO, result.getType());
     }
 
     @Test

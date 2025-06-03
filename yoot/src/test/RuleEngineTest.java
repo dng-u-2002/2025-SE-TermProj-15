@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -6,22 +8,57 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RuleEngineTest {
-    @Test
-    public void testStartPositionMoves() {
-        RuleEngine engine = new RuleEngine(999, 4, List.of(1, 2, 3));
-        List<Integer> result = engine.getPossibleLocation();
-        assertEquals(List.of(1, 2, 3), result);
+
+    public final int startPos = 999;
+    public final int squareCenterPos = 200;
+    public final int pentagonCenterPos = 250;
+    public final int hexagonCenterPos = 300;
+
+    @AfterAll
+    public static void tearDown() {
+        System.gc();
     }
 
     @Test
-    public void testCenterBackDoMove() {
-        RuleEngine engine = new RuleEngine(200, 4, List.of(-1));
+    public void testSquareStartPositionMoves() {
+        RuleEngine engine = new RuleEngine(startPos, 4, List.of(1, 2, 3, 4, 5));
         List<Integer> result = engine.getPossibleLocation();
-        assertEquals(List.of(199), result); // center에서 -1은 index - 1
+        assertEquals(List.of(1, 2, 3, 4, 5), result);
+    }
+    @Test
+    public void testPentagonStartPositionMoves() {
+        RuleEngine engine = new RuleEngine(startPos, 5, List.of(1, 2, 3, 4, 5));
+        List<Integer> result = engine.getPossibleLocation();
+        assertEquals(List.of(1, 2, 3, 4, 5), result);
+    }
+    @Test
+    public void testHexagonStartPositionMoves() {
+        RuleEngine engine = new RuleEngine(startPos, 6, List.of(1, 2, 3, 4, 5));
+        List<Integer> result = engine.getPossibleLocation();
+        assertEquals(List.of(1, 2, 3, 4, 5), result);
     }
 
     @Test
-    public void testCornerSquarePath() {
+    public void testSquareCenterMove() {
+        RuleEngine engine = new RuleEngine(squareCenterPos, 4, List.of(-1, 1, 2, 3, 4, 5));
+        List<Integer> result = engine.getPossibleLocation();
+        assertEquals(List.of(52, 201, 202, 0), result);
+    }
+    @Test
+    public void testPentagonCenterMove() {
+        RuleEngine engine = new RuleEngine(pentagonCenterPos, 5, List.of(-1, 1, 2, 3, 4, 5));
+        List<Integer> result = engine.getPossibleLocation();
+        assertEquals(List.of(52, 251, 252, 0), result);
+    }
+    @Test
+    public void testHexagonCenterMove() {
+        RuleEngine engine = new RuleEngine(hexagonCenterPos, 6, List.of(-1, 1, 2, 3, 4, 5));
+        List<Integer> result = engine.getPossibleLocation();
+        assertEquals(List.of(52, 301, 302, 0), result);
+    }
+
+    @Test
+    public void testSquareCornerMove() {
         RuleEngine engine = new RuleEngine(5, 4, List.of(1, 3));
         List<Integer> result = engine.getPossibleLocation();
 
@@ -30,14 +67,14 @@ class RuleEngineTest {
     }
 
     @Test
-    public void testCornerPentagonPath() {
+    public void testPentagonCornerMove() {
         RuleEngine engine = new RuleEngine(10, 5, List.of(3));
         List<Integer> result = engine.getPossibleLocation();
         assertTrue(result.contains(250), "3일 경우 center로 이동");
     }
 
     @Test
-    public void testCornerHexagonPath() {
+    public void testHexagonCornerMove() {
         RuleEngine engine = new RuleEngine(15, 6, List.of(4));
         List<Integer> result = engine.getPossibleLocation();
         assertFalse(result.isEmpty(), "복잡한 식이지만 값이 있어야 함");
