@@ -104,6 +104,10 @@ Example of path selection in Hexagon and Pentagon board is as following:
  ┃ ┗ 📄 vcs.xml
  ┃
  ┣ 📁 src/
+ ┃ ┣ 📁 test/
+ ┃ ┃ ┣ 📄 RuleEngineTest.java
+ ┃ ┃ ┣ 📄 YutResultTest.java
+ ┃ ┃ ┗ 📄 YutThrowerTest.java
  ┃ ┣ 📄 FXBoardPanel.java
  ┃ ┣ 📄 FXGameUI.java
  ┃ ┣ 📄 FXStartFrame.java
