@@ -26,10 +26,4 @@ class YutThrowerTest {
             assertTrue(resultSet.contains(i), YutResultType.values()[i].getDisplayName() + "(이)가 1000번의 시행 중 한 번도 등장하지 않았음.");
         }
     }
-
-    @Test
-    public void testThrowManualResultVaild() {
-
-    }
-
 }
