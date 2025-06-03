@@ -22,8 +22,9 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 - Players can **restart** or **exit** after a game finishes
 
 ## Swing & How to Execute
-- This branch is for projects implemented in Swing.
-- Run **Yutnori_Swing > Yutnori_Swing.exe**. Then you can see GUI of Swing.
+- This branch is for the project implemented in Swing.
+- **Clone the repository** (e.g. using GitHub Desktop or the git command line) to your local machine.
+- Navigate to **Yutnori_Swing > Yutnori_Swing.exe** and run it to launch the Swing GUI.
 
 ### 🧭 Pentagon and Hexagon Movement Examples
 Example of path selection in Hexagon and Pentagon board is as following:
