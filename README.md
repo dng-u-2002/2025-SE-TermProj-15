@@ -22,8 +22,11 @@ This repository contains the **윷놀이 Game Project** for the Software Enginee
 - Players can **restart** or **exit** after a game finishes
 
 ## JavaFX & How to Execute
-- This branch is for projects implemented in JavaFX. For installation and environment setting for JavaFX, please check **JavaFX 관련 환경설정.txt** file.
-- Run **Yutnori_JavaFX > Yutnori_JavaFX.exe**. Then you can see GUI of JavaFX.
+- This branch contains the project implemented in **JavaFX**.
+- For details on JavaFX installation and environment setup, please refer to the **JavaFX 관련 환경설정.txt** file.
+
+- **Clone the repository** (e.g. using GitHub Desktop or the git command line) to your local machine.
+- Navigate to **Yutnori_JavaFX > Yutnori_JavaFX.exe** and run it to launch the JavaFX GUI.
 
 ### 🧭 Pentagon and Hexagon Movement Examples
 Example of path selection in Hexagon and Pentagon board is as following:
@@ -78,6 +81,9 @@ Example of path selection in Hexagon and Pentagon board is as following:
 ## 📂 Repository Structure
 ```
 📁 .idea/
+ ┣ 📁 artifacts/
+ ┃ ┗ 📄 2025_SE_TermProj_15_jar.xml
+ ┃
  ┣ 📁 libraries/
  ┃ ┣ 📄 junit_jupiter.xml
  ┃ ┗ 📄 lib.xml

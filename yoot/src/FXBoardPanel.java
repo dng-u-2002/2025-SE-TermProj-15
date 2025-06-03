@@ -130,21 +130,21 @@ public class FXBoardPanel {
             }
         }
 
-        // 시작 지점 말 시각화 추가
         gc.setFill(Color.WHITE);
-        gc.fillRect(40, 40, 100, 40);
+        gc.fillRect(10, 10, 100, 40);  // 왼쪽 위로 이동
         gc.setStroke(Color.BLACK);
-        gc.strokeRect(40, 40, 100, 40);
+        gc.strokeRect(10, 10, 100, 40);  // 왼쪽 위로 이동
         gc.setFont(Font.font("맑은 고딕", 12));
-        gc.strokeText("시작 지점", 50, 60);
+        gc.strokeText("시작 지점", 20, 30);  // 텍스트 위치도 왼쪽 위로 이동
+
 
         if (gameController != null) {
             Player currentPlayer = gameController.getCurrentPlayer();
             if (currentPlayer != null && currentPlayer.pieceAtStart > 0) {
                 gc.setFill(playerColors[(currentPlayer.getId() - 1) % playerColors.length]);
-                gc.fillOval(110, 50, 15, 15);
+                gc.fillOval(82, 22, 15, 15);
                 gc.setFill(Color.WHITE);
-                gc.fillText(String.valueOf(currentPlayer.pieceAtStart), 114, 62);
+                gc.fillText(String.valueOf(currentPlayer.pieceAtStart), 86, 34);
             }
         }
     }
@@ -210,7 +210,7 @@ public class FXBoardPanel {
     }
 
     private boolean inStartArea(double x, double y) {
-        return x >= 40 && x <= 150 && y >= 40 && y <= 90;
+        return x >= 72 && x <= 92 && y >= 12 && y <= 32;
     }
 
     private double[] toDoubleArray(int[] arr) {
