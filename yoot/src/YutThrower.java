@@ -83,6 +83,10 @@ public class YutThrower {
             System.out.println("잘못된 선택입니다.");
         }
         */
+
+        if(manual == -1){
+            manual = 0;
+        }
         YutResultType chosen = YutResultType.values()[manual];
         System.out.println("수동 선택 결과: [" + chosen.getDisplayName() + "]");
         return new YutResult(chosen);
